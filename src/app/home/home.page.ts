@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+text = "Erster Text.";
+
+onChangeText(){
+  this.text = "Zweiter Text!";
+}
+
 }
