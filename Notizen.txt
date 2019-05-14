@@ -36,3 +36,7 @@ ngOninit() Lifecycle --> Initialisierungs funktion Konstruktoraufruf
 Wie greift die Page auf den Service zu bzw wie wird diese eingebunden
 
 #in Path was bedeutet das im Zusammenhang mit module 
+
+Zustandsdiagramm zwischen den GUIS mobile
+
+Modelklassendiagramm anpassen --> Liste bei m : 1 

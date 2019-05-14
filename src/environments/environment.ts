@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "<PASTE API KEY HERE>",
+    authDomain: "coachr-app.firebaseapp.com",
+    databaseURL: "https://coachr-app.firebaseio.com",
+    projectId: "clearcoachr-app",
+    storageBucket: "coachr-app.appspot.com",
+    messagingSenderId: "655115056305"
+  }
 };
 
 /*
