@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "<PASTE API KEY HERE>",
+    apiKey: "AIzaSyCHep6XlYcnG8cMGwFBDPGlDABGKrybTz0",
     authDomain: "coachr-app.firebaseapp.com",
     databaseURL: "https://coachr-app.firebaseio.com",
     projectId: "clearcoachr-app",

@@ -5,19 +5,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item
-      ><ion-input type="email" placeholder="E-Mail"></ion-input
-    ></ion-item>
-    <ion-item
-      ><ion-input type="password" placeholder="Passwort"></ion-input
-    ></ion-item>
-    <ion-grid>
-      <ion-row>
-        <ion-col><ion-button [routerLink]="['/register']">Registrieren</ion-button></ion-col>
-        <ion-col><ion-button>Anmelden</ion-button></ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-list>
+<ion-content>  
+    <ion-list>
+      <ion-item>
+        <ion-input type="email" placeholder="E-Mail"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" placeholder="Passwort"></ion-input>
+      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button [routerLink]="['/register']">Registrieren</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button (click)="loginEmail()" (click)="loginGoogle()">Anmelden</ion-button>
+          </ion-col>
+          <ion-col>
+              <ion-button (click)="loginGoogle()">Google Anmeldung</ion-button>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>  
 </ion-content>
