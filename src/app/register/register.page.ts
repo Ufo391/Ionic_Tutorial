@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import {AlertService} from '../util/alert.service';
 
 @Component({
   selector: 'app-register',
@@ -16,11 +16,7 @@ export class RegisterPage implements OnInit {
   password: string = '';
   passwordCheck: string = '';
 
-  constructor(
-    public afAuth: AngularFireAuth,
-    public alertController: AlertController,
-    private router: Router
-  ) {}
+  constructor(public afAuth: AngularFireAuth, private router: Router, private alertService: AlertService) {}
 
   ngOnInit() {}
 
@@ -59,10 +55,7 @@ export class RegisterPage implements OnInit {
         this.password.length > 0 &&
         this.passwordCheck.length > 0) === false
     ) {
-      this.presentAlert(
-        'Bitte füllen Sie alle Eingabefelder aus!',
-        'Vorgang fehlgeschlagen:'
-      );
+      this.alertService.errorEmptyInputs();
       return false;
     }
 
@@ -71,23 +64,10 @@ export class RegisterPage implements OnInit {
 
   private validatePasswords() {
     if (this.password !== this.passwordCheck) {
-      this.presentAlert(
-        'Ihre Passworteingaben stimmen nicht überein!',
-        'Vorgang fehlgeschlagen:'
-      );
+      this.alertService.errorUnequalPasswordInputs();
       return false;
     }
 
     return true;
-  }
-
-  async presentAlert(msg: string, title: string) {
-    const alert = await this.alertController.create({
-      header: title,
-      message: msg,
-      buttons: ['OK']
-    });
-
-    await alert.present();
   }
 }
