@@ -10,16 +10,14 @@ import { auth } from 'firebase';
   providers: [AngularFireAuth]
 })
 export class LoginPage implements OnInit {
-
   User: User;
   email = '';
   password = '';
 
-  constructor(public afAuth: AngularFireAuth) {
-  }
+  constructor(public afAuth: AngularFireAuth) {}
 
   loginEmail() {
-    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
+    // this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
   }
 
   loginGoogle() {
@@ -30,7 +28,5 @@ export class LoginPage implements OnInit {
     this.afAuth.auth.signOut();
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
