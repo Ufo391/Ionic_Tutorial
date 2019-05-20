@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import {AlertService} from '../util/alert.service';
+import { AlertService } from '../util/alert.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +16,11 @@ export class RegisterPage implements OnInit {
   password: string = '';
   passwordCheck: string = '';
 
-  constructor(public afAuth: AngularFireAuth, private router: Router, private alertService: AlertService) {}
+  constructor(
+    public afAuth: AngularFireAuth,
+    private router: Router,
+    private alertService: AlertService
+  ) {}
 
   ngOnInit() {}
 
@@ -69,5 +73,10 @@ export class RegisterPage implements OnInit {
     }
 
     return true;
+  }
+
+  // Events
+  private onRegisterButtonClick() {
+    this.clearInputs();
   }
 }
