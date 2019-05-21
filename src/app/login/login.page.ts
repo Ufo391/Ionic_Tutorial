@@ -8,36 +8,32 @@ import { AuthService } from '../services/auth/athentification.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit {  
 
-  user: firebase.User;
-
-  email = '';
-  resetMail = '';
-  password = '';
+  email: string = '';
+  resetMail: string = '';
+  password: string = '';
 
   constructor(
     private router: Router,
     private alertService: AlertService,
     private authService: AuthService
-  ) { }
-
-  ngOnInit() {
+  ) {    
     this.setCurrentUser();
   }
 
-  navigateToTeamsPage() {
-    if (this.user) {
-      this.clearInputs();
-      this.router.navigate(['/teams']);
-    }
+  ngOnInit() { }
+
+  navigateToTeamsPage() {    
+    this.clearInputs();
+    this.router.navigate(['/teams'])
   }
 
   setCurrentUser() {
     this.authService.getLoggedInUser().subscribe(
       user => {
-        console.log(user);
-        this.user = user;
+        console.log(user);        
+        this.navigateToTeamsPage();
       }
     );
   }
@@ -62,12 +58,13 @@ export class LoginPage implements OnInit {
 
   // Hilfsmethoden
 
-  private clearInputs() {
+  clearInputs() {
     this.email = '';
     this.password = '';
+    this.resetMail = '';
   }
 
-  private validateUserInputs() {
+  validateUserInputs() {
     if ((this.email.length > 0 && this.password.length > 0) === false) {
       this.alertService.errorEmptyInputs();
       return false;
@@ -78,9 +75,9 @@ export class LoginPage implements OnInit {
 
   // Events
 
-  private OnLoginButtonClick() {
+  OnLoginButtonClick() {
     if (this.validateUserInputs() === true) {
-      this.loginEmail();      
+      this.loginEmail();
     }
   }
 }

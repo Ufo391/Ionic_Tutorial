@@ -21,6 +21,13 @@ export class AlertService {
     );
   }
 
+  public showInformation(title: string, message: string) {
+    this.presentAlert(
+      title,
+      message
+    );
+  }
+
   private async presentAlert(title: string, msg: string) {
     const alert = await this.alertController.create({
       header: title,

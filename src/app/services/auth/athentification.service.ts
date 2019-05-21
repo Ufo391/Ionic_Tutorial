@@ -1,24 +1,25 @@
-import {Injectable} from '@angular/core';
-import {AngularFireAuth} from '@angular/fire/auth';
-import {auth} from 'firebase';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  user: firebase.User;
+  private user: firebase.User;
 
   constructor(
-    private afAuth: AngularFireAuth,
-    private router: Router
-  ) {
-  }
+    private afAuth: AngularFireAuth,    
+  ) {}
 
   loginGoogle() {
     console.log('Redirecting to Google login provider');
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+  }
+
+  getUser() {
+    return this.user;
   }
 
   logout() {
