@@ -1,35 +1,7 @@
 stanselljs
 cordova weiterentwicklung capaciter
 
-iOS ist android ist uwp ist trennung
-eine progressiv web ist
-
-Appflow ausarbeiten
-
-Orientierung in Projektarchitektur finden
-
-Erklärung von WebApp, Native und Hybrid
-
-
-Vor und nachteile Tabelle machen von arten der Apps
-
-pwa's --> UWP ablösen ?
-
-MVVM kapitel schreiben 
-
 Webkomponents ausführen
-
-Klassendiagramm erneuern:
-
-	Diagramm extra für MVVM
-	Diagramm extra für Model mit allen seinen Entitäten
-
-Gedanken zu Authentifizierungsmechanismen machen (kann Anforderung)
-
-
-GUI MockUps - Mobile erstellen
-
-Ionic Login Screen erzeugen mit OAuth
 
 ngOninit() Lifecycle --> Initialisierungs funktion Konstruktoraufruf
 
@@ -37,6 +9,11 @@ Wie greift die Page auf den Service zu bzw wie wird diese eingebunden
 
 #in Path was bedeutet das im Zusammenhang mit module 
 
-Zustandsdiagramm zwischen den GUIS mobile
 
-Modelklassendiagramm anpassen --> Liste bei m : 1 
+dependency injection und decorator unterschied
+
+dependency injection in angular vorteile
+
+service provider unterschied ?
+
+Schichten Diagramm Softwarearchitektur zu Services Komponenten usw
