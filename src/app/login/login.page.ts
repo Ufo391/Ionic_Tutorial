@@ -1,47 +1,72 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { AlertService } from '../services/alert/alert.service';
-import { auth } from 'firebase';
+import { AuthService } from '../services/auth/athentification.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  providers: [AngularFireAuth]
 })
 export class LoginPage implements OnInit {
+
+  user: firebase.User;
+
   email = '';
+  resetMail = '';
   password = '';
 
   constructor(
-    public afAuth: AngularFireAuth,
     private router: Router,
-    private alertService: AlertService
-  ) {}
+    private alertService: AlertService,
+    private authService: AuthService
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setCurrentUser();
+  }
+
+  navigateToTeamsPage() {
+    if (this.user) {
+      this.clearInputs();
+      this.router.navigate(['/teams']);
+    }
+  }
+
+  setCurrentUser() {
+    this.authService.getLoggedInUser().subscribe(
+      user => {
+        console.log(user);
+        this.user = user;
+      }
+    );
+  }
 
   loginEmail() {
-    // this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
-    // Bei Erfolg umleiten
-    this.router.navigate(['/teams']);
+    this.authService.loginEmail(this.email, this.password);
+    this.navigateToTeamsPage();
   }
 
   loginGoogle() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.authService.loginGoogle();
+    this.navigateToTeamsPage();
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    this.authService.logout();
   }
+
+  resetPassword() {
+    this.authService.resetPassword(this.resetMail);
+  }
+
+  // Hilfsmethoden
 
   private clearInputs() {
     this.email = '';
     this.password = '';
   }
 
-  // Hilfsmethoden
   private validateUserInputs() {
     if ((this.email.length > 0 && this.password.length > 0) === false) {
       this.alertService.errorEmptyInputs();
@@ -55,8 +80,7 @@ export class LoginPage implements OnInit {
 
   private OnLoginButtonClick() {
     if (this.validateUserInputs() === true) {
-      this.loginEmail();
-      this.clearInputs();
+      this.loginEmail();      
     }
   }
 }

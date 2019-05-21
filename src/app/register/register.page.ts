@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
 import { AlertService } from '../services/alert/alert.service';
+import { AuthService } from '../services/auth/athentification.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
-  providers: [AngularFireAuth]
+  styleUrls: ['./register.page.scss']
 })
+
 export class RegisterPage implements OnInit {
   firstName: string = '';
   lastName: string = '';
@@ -16,23 +15,21 @@ export class RegisterPage implements OnInit {
   password: string = '';
   passwordCheck: string = '';
 
-  constructor(
-    public afAuth: AngularFireAuth,
-    private router: Router,
-    private alertService: AlertService
+  constructor(        
+    private alertService: AlertService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {}
 
   register() {
     if (this.checkInputs() === true) {
-      this.transferData();
-      this.router.navigate(['/login']);
+      this.transferData();      
     }
   }
 
   private transferData() {
-    // this.afAuth.auth.createUserWithEmailAndPassword(this.mail, this.password);
+    this.authService.register(this.mail, this.password);
     this.clearInputs();
   }
 
@@ -77,6 +74,7 @@ export class RegisterPage implements OnInit {
 
   // Events
   private onRegisterButtonClick() {
+    this.register();
     this.clearInputs();
   }
 }
