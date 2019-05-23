@@ -1,46 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AlertService } from '../services/alert/alert.service';
-import { AuthService } from '../services/auth/athentification.service';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AlertService } from "../services/alert/alert.service";
+import { AuthService } from "../services/auth/athentification.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: "app-login",
+  templateUrl: "./login.page.html",
+  styleUrls: ["./login.page.scss"]
 })
-export class LoginPage implements OnInit {  
-
-  email: string = '';
-  resetMail: string = '';
-  password: string = '';
+export class LoginPage implements OnInit {
+  email: string = "";
+  resetMail: string = "";
+  password: string = "";
 
   constructor(
     private router: Router,
     private alertService: AlertService,
     private authService: AuthService
-  ) {    
+  ) {
     this.setCurrentUser();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  navigateToTeamsPage() {    
+  navigateToTeamsPage() {
     this.clearInputs();
-    this.router.navigate(['/teams'])
+    this.router.navigate(["/teams"]);
   }
 
   setCurrentUser() {
-    this.authService.getLoggedInUser().subscribe(
-      user => {
-        console.log(user);        
+    this.authService.getLoggedInUser().subscribe(user => {      
+      if (user !== null) {
         this.navigateToTeamsPage();
       }
-    );
+    });
   }
 
   loginEmail() {
-    this.authService.loginEmail(this.email, this.password);
-    this.navigateToTeamsPage();
+    debugger;
+    this.authService.loginEmail(this.email, this.password,this.navigateToTeamsPage);
+    // this.navigateToTeamsPage();
   }
 
   loginGoogle() {
@@ -59,9 +58,9 @@ export class LoginPage implements OnInit {
   // Hilfsmethoden
 
   clearInputs() {
-    this.email = '';
-    this.password = '';
-    this.resetMail = '';
+    this.email = "";
+    this.password = "";
+    this.resetMail = "";
   }
 
   validateUserInputs() {
