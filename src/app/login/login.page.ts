@@ -21,15 +21,17 @@ export class LoginPage implements OnInit {
     this.setCurrentUser();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   navigateToTeamsPage() {
-    this.clearInputs();
     this.router.navigate(["/teams"]);
+    this.clearInputs();
   }
 
   setCurrentUser() {
-    this.authService.getLoggedInUser().subscribe(user => {      
+    const that = this;
+
+    this.authService.getLoggedInUser().subscribe(user => {
       if (user !== null) {
         this.navigateToTeamsPage();
       }
@@ -37,9 +39,7 @@ export class LoginPage implements OnInit {
   }
 
   loginEmail() {
-    debugger;
-    this.authService.loginEmail(this.email, this.password,this.navigateToTeamsPage);
-    // this.navigateToTeamsPage();
+    this.authService.loginEmail(this.email, this.password, this.navigateToTeamsPage.bind(this));
   }
 
   loginGoogle() {

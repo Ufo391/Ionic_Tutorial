@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../services/auth/athentification.service";
 import { AlertService } from "../services/alert/alert.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-teams",
@@ -12,7 +13,8 @@ export class TeamsPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router,
   ) {
     this.setCurrentUser();
   }
@@ -27,6 +29,8 @@ export class TeamsPage implements OnInit {
           "Erfolg:",
           "Willkommen: " + user.email
         );
+      } else {
+        this.router.navigate(["/login"]);
       }
     });
   }

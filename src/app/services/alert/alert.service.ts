@@ -21,6 +21,13 @@ export class AlertService {
     );
   }
 
+  public errorUserMailNotFound(message: string) {
+    this.presentAlert(
+      'Vorgang abgebrochen:',
+      message
+    );
+  }
+
   public showInformation(title: string, message: string) {
     this.presentAlert(
       title,
