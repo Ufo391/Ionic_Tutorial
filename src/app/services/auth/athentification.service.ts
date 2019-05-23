@@ -32,9 +32,13 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         callback();
+        Callback funktion für navigate to gedöns
       })
       .catch(function(error) {
         debugger;
+
+        hier weiter machen es wird hier ein fehler geworfen wenn man falsche Eingaben macht
+
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
