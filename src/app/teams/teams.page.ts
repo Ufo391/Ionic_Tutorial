@@ -17,7 +17,7 @@ export class TeamsPage implements OnInit {
     this.setCurrentUser();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   setCurrentUser() {
     this.authService.getLoggedInUser().subscribe(user => {
@@ -29,5 +29,9 @@ export class TeamsPage implements OnInit {
         );
       }
     });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
