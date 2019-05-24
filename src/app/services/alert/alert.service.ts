@@ -21,7 +21,7 @@ export class AlertService {
     );
   }
 
-  public errorUserMailNotFound(message: string) {
+  public errorAuthProcess(message: string) {
     this.presentAlert(
       'Vorgang abgebrochen:',
       message

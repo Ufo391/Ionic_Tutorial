@@ -1,44 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertService } from '../services/alert/alert.service';
-import { AuthService } from '../services/auth/athentification.service';
+import { Component, OnInit } from "@angular/core";
+import { AlertService } from "../services/alert/alert.service";
+import { AuthService } from "../services/auth/athentification.service";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss']
+  selector: "app-register",
+  templateUrl: "./register.page.html",
+  styleUrls: ["./register.page.scss"]
 })
-
 export class RegisterPage implements OnInit {
-  firstName: string = '';
-  lastName: string = '';
-  mail: string = '';
-  password: string = '';
-  passwordCheck: string = '';
+  firstName: string = "";
+  lastName: string = "";
+  mail: string = "";
+  password: string = "";
+  passwordCheck: string = "";
 
-  constructor(        
+  constructor(
+    private router: Router,
     private alertService: AlertService,
     private authService: AuthService
-  ) {}
+  ) {
+    this.setCurrentUser();
+  }
 
   ngOnInit() {}
 
   register() {
     if (this.checkInputs() === true) {
-      this.transferData();      
+      this.transferData("/teams");
     }
   }
 
-  private transferData() {
-    this.authService.register(this.mail, this.password);
-    this.clearInputs();
+  private transferData(page: string) {
+    this.authService.register(
+      this.mail,
+      this.password,
+      this.navigateToPage.bind(this),
+      page
+    );
   }
 
   private clearInputs() {
-    this.firstName = '';
-    this.lastName = '';
-    this.mail = '';
-    this.password = '';
-    this.passwordCheck = '';
+    this.firstName = "";
+    this.lastName = "";
+    this.mail = "";
+    this.password = "";
+    this.passwordCheck = "";
   }
 
   private checkInputs() {
@@ -72,9 +79,23 @@ export class RegisterPage implements OnInit {
     return true;
   }
 
+  navigateToPage(page: string) {
+    this.router.navigate([page]);
+    this.clearInputs();
+  }
+
+  setCurrentUser() {
+    const that = this;
+
+    this.authService.getLoggedInUser().subscribe(user => {
+      if (user !== null) {
+        this.navigateToPage("/teams");
+      }
+    });
+  }
+
   // Events
   private onRegisterButtonClick() {
     this.register();
-    this.clearInputs();
   }
 }

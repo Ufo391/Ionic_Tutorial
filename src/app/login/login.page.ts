@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
   }
 
   loginGoogle() {
-    this.authService.loginGoogle();
+    this.authService.loginGoogle(this.navigateToTeamsPage.bind(this));
     this.navigateToTeamsPage();
   }
 
