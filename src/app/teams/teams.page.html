@@ -1,9 +1,42 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>teams</ion-title>
-  </ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-title>Mannschaften</ion-title>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><ion-icon name="notifications-outline"></ion-icon></ion-col>
+      <ion-col><ion-icon name="football"></ion-icon></ion-col>
+      <ion-col><ion-icon name="person"></ion-icon></ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
-<ion-content>
-<ion-button (click)="logout()" [routerLink]="['/login']">Ausloggen</ion-button>
-</ion-content>
+<ion-tabs>
+    <ion-content>
+        <ion-button expand="full" class="mannschaft-buttons">Mannschaft 1</ion-button>
+        <ion-button expand="full" class="mannschaft-buttons">Mannschaft 2</ion-button>
+        <ion-button expand="full" class="mannschaft-buttons">Mannschaft 3</ion-button>
+        <ion-button expand="full" class="mannschaft-buttons">Mannschaft 4</ion-button>
+      </ion-content>
+  <ion-button (click)="logout()" [routerLink]="['/login']"
+    >Ausloggen</ion-button
+  >
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="mannschaft">
+      <ion-icon name="contacts"></ion-icon>
+      <ion-label>Mannschaft</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="ueberblick">
+      <ion-icon name="eye"></ion-icon>
+      <ion-label>Überblick</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="trainingsplaner">
+      <ion-icon name="clipboard"></ion-icon>
+      <ion-label>Trainingsplaner</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

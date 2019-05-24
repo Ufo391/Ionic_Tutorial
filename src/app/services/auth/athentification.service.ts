@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { auth } from "firebase";
 import { AlertService } from "../alert/alert.service";
-import { Action } from "rxjs/internal/scheduler/Action";
 
 @Injectable({
   providedIn: "root"
@@ -32,7 +31,10 @@ export class AuthService {
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    let that = this;
+    this.afAuth.auth.signOut().catch(error => {
+      that.alertService.errorAuthProcess(error.message);
+    });
   }
 
   getLoggedInUser() {
@@ -53,10 +55,19 @@ export class AuthService {
   }
 
   resetPassword(email: string) {
-    this.afAuth.auth.sendPasswordResetEmail(email);
+    const that = this;
+    
+    this.afAuth.auth.sendPasswordResetEmail(email).catch(error => {
+      that.alertService.errorAuthProcess(error.message);
+    });
   }
 
-  register(email: string, password: string, navigateCallback, targetPage: string) {
+  register(
+    email: string,
+    password: string,
+    navigateCallback,
+    targetPage: string
+  ) {
     const that = this;
 
     this.afAuth.auth

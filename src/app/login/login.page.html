@@ -5,13 +5,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>  
+<ion-content>
+  <ion-card>
     <ion-list>
       <ion-item>
-        <ion-input type="email" placeholder="E-Mail" [(ngModel)]="email"></ion-input>
+        <ion-input
+          type="email"
+          placeholder="E-Mail"
+          [(ngModel)]="email"
+        ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="password" placeholder="Passwort" [(ngModel)]="password"></ion-input>
+        <ion-input
+          type="password"
+          placeholder="Passwort"
+          [(ngModel)]="password"
+        ></ion-input>
       </ion-item>
       <ion-grid>
         <ion-row>
@@ -22,9 +31,10 @@
             <ion-button (click)="OnLoginButtonClick()">Anmelden</ion-button>
           </ion-col>
           <ion-col>
-              <ion-button (click)="loginGoogle()">Google Anmeldung</ion-button>
-            </ion-col>
+            <ion-button (click)="loginGoogle()">Google Anmeldung</ion-button>
+          </ion-col>
         </ion-row>
       </ion-grid>
-    </ion-list>  
+    </ion-list>
+  </ion-card>
 </ion-content>
