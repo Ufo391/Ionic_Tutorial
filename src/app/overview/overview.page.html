@@ -2,7 +2,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-title>Mannschaften</ion-title>
+        <ion-title>Überblick</ion-title>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -14,21 +14,13 @@
 </ion-header>
 
 <ion-tabs>
-    <ion-content>
-        <ion-button expand="full" class="mannschaft-buttons">Mannschaft 1</ion-button>
-        <ion-button expand="full" class="mannschaft-buttons">Mannschaft 2</ion-button>
-        <ion-button expand="full" class="mannschaft-buttons">Mannschaft 3</ion-button>
-        <ion-button expand="full" class="mannschaft-buttons">Mannschaft 4</ion-button>
-      </ion-content>
-  <ion-button (click)="logout()" [routerLink]="['/login']"
-    >Ausloggen</ion-button
-  >
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="mannschaft">
+    <ion-tab-button tab="mannschaft" [routerLink]="['/teams']">
       <ion-icon name="contacts"></ion-icon>
       <ion-label>Mannschaft</ion-label>
-    </ion-tab-button>    
-    <ion-tab-button tab="ueberblick" [routerLink]="['/overview']">
+    </ion-tab-button>
+
+    <ion-tab-button tab="ueberblick">
       <ion-icon name="eye"></ion-icon>
       <ion-label>Überblick</ion-label>
     </ion-tab-button>

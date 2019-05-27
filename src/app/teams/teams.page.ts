@@ -14,21 +14,17 @@ export class TeamsPage implements OnInit {
   constructor(
     private authService: AuthService,
     private alertService: AlertService,
-    private router: Router,
+    private router: Router
   ) {
     this.setCurrentUser();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   setCurrentUser() {
     this.authService.getLoggedInUser().subscribe(user => {
       if (user !== null) {
         this.user = user;
-        this.alertService.showInformation(
-          "Erfolg:",
-          "Willkommen: " + user.email
-        );
       } else {
         this.router.navigate(["/login"]);
       }
