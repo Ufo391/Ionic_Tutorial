@@ -15,12 +15,13 @@
 
 <ion-tabs>
   <ion-list>
+      <ion-item>
+          <img src="../../assets/Fussballfeld-dummy.jpg" class="responsive"/>      
+      </ion-item>
     <ion-item>
       <ion-label>Übung:</ion-label>
       <ion-select multiple="false" cancelText="Abbrechen" okText="Bestätigen">
-        <ion-select-option value="Uebung1"
-          >Übung 1</ion-select-option
-        >
+        <ion-select-option value="Uebung1">Übung 1</ion-select-option>
         <ion-select-option value="Uebung2">Übung 2</ion-select-option>
       </ion-select>
     </ion-item>
@@ -28,27 +29,24 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-label>Infos:</ion-label>
+            <ion-button (click)="showTrainingProperties()">Eigenschaften</ion-button>
           </ion-col>
           <ion-col>
             <ion-grid>
               <ion-row>
                 <ion-col>
-                    <ion-icon name="chatboxes"></ion-icon>
+                  <ion-icon name="chatboxes"></ion-icon>
                 </ion-col>
               </ion-row>
               <ion-row>
                 <ion-col>
-                    <ion-label>Kommentieren</ion-label>
+                  <ion-label>Kommentieren</ion-label>
                 </ion-col>
               </ion-row>
-            </ion-grid>            
+            </ion-grid>
           </ion-col>
         </ion-row>
       </ion-grid>
-    </ion-item>
-    <ion-item>
-      <ion-img></ion-img>
     </ion-item>
   </ion-list>
   <ion-tab-bar slot="bottom">

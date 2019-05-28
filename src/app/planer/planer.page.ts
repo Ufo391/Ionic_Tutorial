@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from '../services/alert/alert.service';
 
 @Component({
   selector: 'app-planer',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanerPage implements OnInit {
 
-  constructor() { }
+  constructor(private alertService: AlertService) { }
 
   ngOnInit() {
+  }
+
+  showTrainingProperties() {
+    this.alertService.showInformation("Eigenschaften", "Torschuss \n Kraftübung");
   }
 
 }
