@@ -14,53 +14,55 @@
 </ion-header>
 
 <ion-tabs>
-  <ion-list>
-    <ion-item>
-      <ion-label>Spieler:</ion-label>
-      <ion-select multiple="false" cancelText="Abbrechen" okText="Bestätigen">
-        <ion-select-option value="Günther Ballack"
-          >Günther Ballack</ion-select-option
-        >
-        <ion-select-option value="Mario Super">Mario Super</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-button>Anschrift</ion-button>
-    </ion-item>
-    <ion-icon name="create"></ion-icon>
-    <ion-label>Bearbeiten</ion-label>
-    <ion-item>
-      <ion-range min="50" max="250" step="1" snaps="true" pin="true">
-        <ion-label slot="start">Größe:</ion-label>
-        <ion-label slot="end">250cm</ion-label>
-      </ion-range>
-    </ion-item>
-    <ion-item>
-      <ion-range min="20" max="150" step="1" snaps="true" pin="true">
-        <ion-label slot="start">Gewicht:</ion-label>
-        <ion-label slot="end">150kg</ion-label>
-      </ion-range>
-    </ion-item>
-    <ion-item>
-      <ion-range min="0" max="10" step="1" snaps="true" pin="true">
-        <ion-label slot="start">St. Fuß:</ion-label>
-        <ion-label slot="end">10</ion-label>
-      </ion-range>
-    </ion-item>
-    <ion-item>
-      <ion-range min="0" max="10" step="1" snaps="true" pin="true">
-        <ion-label slot="start">Sw. Fuß:</ion-label>
-        <ion-label slot="end">10</ion-label>
-      </ion-range>
-    </ion-item>
-    <ion-item>
-      <ion-button>Hinzufügen</ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-button>Neu bewerten</ion-button>
-      <ion-button>Löschen</ion-button>
-    </ion-item>
-  </ion-list>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>Spieler:</ion-label>
+        <ion-select multiple="false" cancelText="Abbrechen" okText="Bestätigen">
+          <ion-select-option value="Günther Ballack"
+            >Günther Ballack</ion-select-option
+          >
+          <ion-select-option value="Mario Super">Mario Super</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-button>Anschrift</ion-button>
+      </ion-item>
+      <ion-icon name="create"></ion-icon>
+      <ion-label>Bearbeiten</ion-label>
+      <ion-item>
+        <ion-range min="50" max="250" step="1" snaps="true" pin="true">
+          <ion-label slot="start">Größe:</ion-label>
+          <ion-label slot="end">250cm</ion-label>
+        </ion-range>
+      </ion-item>
+      <ion-item>
+        <ion-range min="20" max="150" step="1" snaps="true" pin="true">
+          <ion-label slot="start">Gewicht:</ion-label>
+          <ion-label slot="end">150kg</ion-label>
+        </ion-range>
+      </ion-item>
+      <ion-item>
+        <ion-range min="0" max="10" step="1" snaps="true" pin="true">
+          <ion-label slot="start">St. Fuß:</ion-label>
+          <ion-label slot="end">10</ion-label>
+        </ion-range>
+      </ion-item>
+      <ion-item>
+        <ion-range min="0" max="10" step="1" snaps="true" pin="true">
+          <ion-label slot="start">Sw. Fuß:</ion-label>
+          <ion-label slot="end">10</ion-label>
+        </ion-range>
+      </ion-item>
+      <ion-item>
+        <ion-button>Hinzufügen</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button>Neu bewerten</ion-button>
+        <ion-button>Löschen</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="mannschaft" [routerLink]="['/teams']">
       <ion-icon name="contacts"></ion-icon>

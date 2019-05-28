@@ -1,34 +1,70 @@
 <ion-header>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-title>Trainingsplaner</ion-title>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col><ion-icon name="notifications-outline"></ion-icon></ion-col>
-        <ion-col><ion-icon name="football"></ion-icon></ion-col>
-        <ion-col><ion-icon name="person"></ion-icon></ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-header>
-  
-  <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="mannschaft" [routerLink]="['/teams']">
-        <ion-icon name="contacts"></ion-icon>
-        <ion-label>Mannschaft</ion-label>
-      </ion-tab-button>
-  
-      <ion-tab-button tab="ueberblick" [routerLink]="['/overview']">
-        <ion-icon name="eye"></ion-icon>
-        <ion-label>Überblick</ion-label>
-      </ion-tab-button>
-  
-      <ion-tab-button tab="trainingsplaner">
-        <ion-icon name="clipboard"></ion-icon>
-        <ion-label>Trainingsplaner</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
-  
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-title>Trainingsplaner</ion-title>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><ion-icon name="notifications-outline"></ion-icon></ion-col>
+      <ion-col><ion-icon name="football"></ion-icon></ion-col>
+      <ion-col><ion-icon name="person"></ion-icon></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-tabs>
+  <ion-list>
+    <ion-item>
+      <ion-label>Übung:</ion-label>
+      <ion-select multiple="false" cancelText="Abbrechen" okText="Bestätigen">
+        <ion-select-option value="Uebung1"
+          >Übung 1</ion-select-option
+        >
+        <ion-select-option value="Uebung2">Übung 2</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Infos:</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                    <ion-icon name="chatboxes"></ion-icon>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                    <ion-label>Kommentieren</ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-grid>            
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-img></ion-img>
+    </ion-item>
+  </ion-list>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="mannschaft" [routerLink]="['/teams']">
+      <ion-icon name="contacts"></ion-icon>
+      <ion-label>Mannschaft</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="ueberblick" [routerLink]="['/overview']">
+      <ion-icon name="eye"></ion-icon>
+      <ion-label>Überblick</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="trainingsplaner">
+      <ion-icon name="clipboard"></ion-icon>
+      <ion-label>Trainingsplaner</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
