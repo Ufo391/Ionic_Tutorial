@@ -14,6 +14,8 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -21,7 +23,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     // imports firebase/app needed for everything
     AngularFireModule.initializeApp(environment.firebase, 'coachr'),
     // imports firebase/auth, only needed for auth features
-    AngularFireAuthModule,],
+    AngularFireAuthModule, HttpClientModule,],
   providers: [
     StatusBar,
     SplashScreen,
