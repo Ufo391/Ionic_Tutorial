@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AlertService } from '../services/alert/alert.service';
+import { Player } from '../model/player.model';
 
 @Component({
   selector: "app-overview",
@@ -10,9 +11,43 @@ import { AlertService } from '../services/alert/alert.service';
 export class OverviewPage implements OnInit {
   constructor(private router: Router, private alertService: AlertService) { }
 
+  players: Player[] = [
+    {
+      name: 'Hans Sarpei',
+      birth: '29.08.1991',
+      address: 'Ligusterweg 33a',
+      isWoman: false, memo: '',
+      properties: [
+        { name: 'Größe', value: 155, type: 0 },
+        { name: 'Gewicht', value: 58, type: 1 },
+        { name: 'St. Fuß', value: 4, type: 2 },
+        { name: 'Sw. Fuß', value: 9, type: 3 }
+      ]
+    },
+    {
+      name: 'Rudi Voller',
+      birth: '16.01.1971',
+      address: 'Musterstraße 33a',
+      isWoman: false, memo: 'Hat immer Durst!',
+      properties: [
+        { name: 'Größe', value: 180, type: 0 },
+        { name: 'Gewicht', value: 125, type: 1 },
+        { name: 'St. Fuß', value: 1, type: 2 },
+        { name: 'Sw. Fuß', value: 4, type: 3 }
+      ]
+    }
+  ];
+
+  selectedPlayer: Player;
+
   ngOnInit() { }
 
+  optionsFn($event) {
+    this.selectedPlayer = $event.target.value;
+    debugger;
+  }
+
   showAdress() {
-    this.alertService.showInformation('Anschrift:', 'Musterstraße 3b<br/> 12345 Musterstadt');
+    this.alertService.showInformation('Anschrift:', this.selectedPlayer.address);
   }
 }
