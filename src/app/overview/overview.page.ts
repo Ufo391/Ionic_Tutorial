@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { AlertService } from '../services/alert/alert.service';
 
 @Component({
   selector: "app-overview",
@@ -7,7 +8,11 @@ import { Router } from "@angular/router";
   styleUrls: ["./overview.page.scss"]
 })
 export class OverviewPage implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private alertService: AlertService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  showAdress() {
+    this.alertService.showInformation('Anschrift:', 'Musterstraße 3b<br/> 12345 Musterstadt');
+  }
 }

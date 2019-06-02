@@ -25,11 +25,17 @@ export class TeamsPage implements OnInit {
     this.setCurrentUser();
   }
 
+  debuging() {
+    debugger;
+  }
+
   ngOnInit() {
     const params = new HttpParams()
       .set('authtoken', 'uid');
 
-    this.teams$ = this.http.get<Team[]>('https://virtserver.swaggerhub.com/AHeinisch/trainingsplaner/1.0.1/api/Team', { params });
+    const uri = 'https://virtserver.swaggerhub.com/AHeinisch/trainingsplaner/1.0.1/api/Team';
+
+    this.teams$ = this.http.get<Team[]>(uri, { params });
   }
 
   setCurrentUser() {
