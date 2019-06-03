@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../services/auth/athentification.service";
-import { AlertService } from "../services/alert/alert.service";
+import { AuthService } from "../../services/auth/athentification.service";
+import { AlertService } from "../../services/alert/alert.service";
 import { Observable } from 'rxjs';
 import { Router } from "@angular/router";
-import { Team } from '../model/team.model';
+import { Team } from '../../model/team.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({

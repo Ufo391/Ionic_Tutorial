@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { AlertService } from '../services/alert/alert.service';
-import { Player } from '../model/player.model';
+import { AlertService } from '../../services/alert/alert.service';
+import { Player } from '../../model/player.model';
 
 @Component({
   selector: "app-overview",
