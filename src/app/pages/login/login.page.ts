@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
     this.setCurrentUser();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   navigateToTeamsPage() {
     this.router.navigate(["/teams"]);
@@ -39,7 +39,11 @@ export class LoginPage implements OnInit {
   }
 
   loginEmail() {
-    this.authService.loginEmail(this.email, this.password, this.navigateToTeamsPage.bind(this));
+    this.authService.loginEmail(
+      this.email,
+      this.password,
+      this.navigateToTeamsPage.bind(this)
+    );
   }
 
   loginGoogle() {

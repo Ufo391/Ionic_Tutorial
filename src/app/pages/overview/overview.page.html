@@ -19,8 +19,8 @@
       <ion-list>
         <ion-item>
           <ion-label>Spieler:</ion-label>
-          <ion-select (ionChange)="optionsFn($event)">
-            <ion-select-option value="Player" *ngFor="let Player of players">{{Player.name}}</ion-select-option>
+          <ion-select [(ngModel)]="selectedPlayer" (ionChange)="optionsFn(selectedPlayer)">
+            <ion-select-option *ngFor="let Player of players" [value]="Player">{{Player.name}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>
