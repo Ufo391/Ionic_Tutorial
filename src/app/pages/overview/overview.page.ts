@@ -46,11 +46,6 @@ export class OverviewPage implements OnInit {
 
   ngOnInit() {}
 
-  optionsFn(selected_value: Player) {
-    console.log(selected_value.name + ' mit id ' + selected_value.id);
-    console.log(this.selectedPlayer.name);
-  }
-
   showAdress() {
     this.alertService.showInformation(
       "Anschrift:",
