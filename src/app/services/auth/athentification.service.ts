@@ -12,7 +12,7 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private alertService: AlertService
-  ) {}
+  ) { }
 
   loginGoogle(navigateCallback) {
     let that = this;
@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   logout() {
-    let that = this;
+    const that = this;
     this.afAuth.auth.signOut().catch(error => {
       that.alertService.errorAuthProcess(error.message);
     });
@@ -56,7 +56,7 @@ export class AuthService {
 
   resetPassword(email: string) {
     const that = this;
-    
+
     this.afAuth.auth.sendPasswordResetEmail(email).catch(error => {
       that.alertService.errorAuthProcess(error.message);
     });

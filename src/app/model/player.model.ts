@@ -4,9 +4,9 @@ import { PlayerPropertie } from './playerPropertie.model';
 export interface Player {
     id: number;
     name: string;
-    birth: string;
+    birth: Date;
     memo: string;
     isWoman: boolean;
     properties: PlayerPropertie[];
-    address: string;
+    address: Address;
 }
