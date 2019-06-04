@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AlertService } from "../../services/alert/alert.service";
 import { AuthService } from "../../services/auth/athentification.service";
+import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: "app-login",
@@ -16,16 +17,26 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private alertService: AlertService,
-    private authService: AuthService
+    private authService: AuthService,
+    private apiService: ApiService
   ) {
     this.setCurrentUser();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   navigateToTeamsPage() {
-    this.router.navigate(["/teams"]);
-    this.clearInputs();
+
+    const that = this;
+
+    this.apiService.login(this.email, this.authService.getUser().uid).then(result => {
+
+      that.router.navigate(["/teams"]);
+      that.clearInputs();
+      that.alertService.showInformation("debug:", JSON.parse(result)); hier weiter machen
+
+    }).catch(error => { that.alertService.errorAuthProcess(error); });
+
   }
 
   setCurrentUser() {
