@@ -25,10 +25,6 @@ export class TeamsPage implements OnInit {
     this.setCurrentUser();
   }
 
-  debuging() {
-    debugger;
-  }
-
   ngOnInit() {
     const params = new HttpParams()
       .set('authtoken', 'uid');

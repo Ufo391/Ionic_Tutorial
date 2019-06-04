@@ -7,7 +7,8 @@ import { AlertService } from "../alert/alert.service";
   providedIn: "root"
 })
 export class AuthService {
-  private user: firebase.User;
+  private firebaseUser: firebase.User;
+  private authToken: string;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -27,7 +28,7 @@ export class AuthService {
   }
 
   getUser() {
-    return this.user;
+    return this.firebaseUser;
   }
 
   logout() {
