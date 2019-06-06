@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { AlertService } from "../../services/alert/alert.service";
 import { AuthService } from "../../services/auth/athentification.service";
 import { ApiService } from 'src/app/services/api/api.service';
-import { LoginResponse } from 'src/app/model/response.interfaces';
+import { LoginResponse } from 'src/app/responses/response.interfaces';
 
 @Component({
   selector: "app-login",
@@ -29,11 +29,11 @@ export class LoginPage implements OnInit {
   navigateToTeamsPage(user: firebase.User) {
 
     const that = this;
-
     this.apiService.login(user.email, user.uid).subscribe((res: LoginResponse) => {
 
-      that.alertService.showInformation("debug:", res.token + " - " + res.trainerID);
-      debugger;
+      that.authService.setAuthToken(res.token);
+      hier weiter machen asjdaljsdjhkajsdh
+      // erzeuge hier eine neue Instanz des Trainers via API Call !!!
       that.router.navigate(["/teams"]);
       that.clearInputs();
 

@@ -1,5 +1,9 @@
+import { Merkmale } from '../services/enums/enums.service';
+import { User } from './user.model';
+
 export interface PlayerPropertie {
-    name: string;
+    creatorDate: Date;
     value: number;
-    type: number;
+    typ: Merkmale;
+    creator: User;
 }

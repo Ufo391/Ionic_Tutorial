@@ -3,4 +3,4 @@ export interface Team {
     name: string;
     alterklasse: number;
     liga: number;
-}   
+}

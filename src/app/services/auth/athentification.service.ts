@@ -27,11 +27,25 @@ export class AuthService {
       });
   }
 
-  getUser() {
+  getUser(): firebase.User {
     return this.firebaseUser;
   }
 
+  getAuthToken(): string {
+    return this.authToken;
+  }
+
+  setAuthToken(token: string): void {
+    debugger;
+    if (this.authToken.length !== 0) {
+      throw new Error('Ungültige Modifizierung!');
+    } else {
+      this.authToken = token;
+    }
+  }
+
   logout() {
+    // Todo --> Authtoken & User & Trainer auf null setzen!
     const that = this;
     this.afAuth.auth.signOut().catch(error => {
       that.alertService.errorAuthProcess(error.message);

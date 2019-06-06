@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-export enum Merkmal {
+export enum Merkmale {
   GROESSE,
   GEWICHT,
   SCHUSSKRAFT,
@@ -61,7 +61,7 @@ export enum USchwerpunkt {
   FLANKEN
 }
 
-export enum UTyp {
+export enum UElementTyp {
   BALL,
   HUETCHEN,
   TOR,
@@ -74,7 +74,7 @@ export enum UTyp {
   HUERDE
 }
 
-export enum TAlterklasse {
+export enum TAltersklasse {
   U5,
   U6,
   U7,
@@ -111,7 +111,9 @@ export enum TLiga {
   BUNDESLIGA1
 }
 
-
+export enum MerkmalTyp {
+  DUMMY
+}
 
 @Injectable({
   providedIn: 'root'
