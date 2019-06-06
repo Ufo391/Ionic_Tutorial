@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { AlertService } from "../../services/alert/alert.service";
 import { AuthService } from "../../services/auth/athentification.service";
 import { ApiService } from 'src/app/services/api/api.service';
+import { LoginResponse } from 'src/app/model/response.interfaces';
 
 @Component({
   selector: "app-login",
@@ -25,17 +26,20 @@ export class LoginPage implements OnInit {
 
   ngOnInit() { }
 
-  navigateToTeamsPage() {
+  navigateToTeamsPage(user: firebase.User) {
 
     const that = this;
 
-    this.apiService.login(this.email, this.authService.getUser().uid).then(result => {
+    this.apiService.login(user.email, user.uid).subscribe((res: LoginResponse) => {
 
+      that.alertService.showInformation("debug:", res.token + " - " + res.trainerID);
+      debugger;
       that.router.navigate(["/teams"]);
       that.clearInputs();
-      that.alertService.showInformation("debug:", JSON.parse(result)); hier weiter machen
 
-    }).catch(error => { that.alertService.errorAuthProcess(error); });
+    }, error => {
+      that.alertService.errorAuthProcess(error);
+    });
 
   }
 
@@ -44,7 +48,7 @@ export class LoginPage implements OnInit {
 
     this.authService.getLoggedInUser().subscribe(user => {
       if (user !== null) {
-        this.navigateToTeamsPage();
+        this.navigateToTeamsPage(user);
       }
     });
   }
