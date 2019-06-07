@@ -36,8 +36,7 @@ export class AuthService {
   }
 
   setAuthToken(token: string): void {
-    debugger;
-    if (this.authToken.length !== 0) {
+    if (this.authToken !== undefined) {
       throw new Error('Ungültige Modifizierung!');
     } else {
       this.authToken = token;

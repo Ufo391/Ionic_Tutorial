@@ -33,6 +33,7 @@ export class LoginPage implements OnInit {
 
       that.authService.setAuthToken(res.token);
       // erzeuge hier eine neue Instanz des Trainers via API Call !!!
+      hier weiter machen
       that.router.navigate(["/teams"]);
       that.clearInputs();
 
