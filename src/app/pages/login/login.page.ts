@@ -32,7 +32,6 @@ export class LoginPage implements OnInit {
     this.apiService.login(user.email, user.uid).subscribe((res: LoginResponse) => {
 
       that.authService.setAuthToken(res.token);
-      hier weiter machen asjdaljsdjhkajsdh
       // erzeuge hier eine neue Instanz des Trainers via API Call !!!
       that.router.navigate(["/teams"]);
       that.clearInputs();
