@@ -15,21 +15,19 @@ export class APIMock extends AbstractServerAPI {
     }
 
     getToken(user: User): string {
-        return 'geheimesTokenVon:' + user.getMail();
+        return 'geheimesTokenVon:' + user.name;
     }
 
     private async findUser(email: string): Promise<User> {
 
         let result: User = null;
         const promises = this.mockingService.trainers.map((trainer: User) => {
-            if (trainer.getMail() === email) {
+            if (trainer.mail === email) {
                 result = trainer;
             }
         });
 
         await Promise.all(promises);
-
-        debugger;
         return result;
     }
 }

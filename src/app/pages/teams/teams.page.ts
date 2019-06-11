@@ -17,7 +17,7 @@ export class TeamsPage implements OnInit {
   uid: Observable<string>;
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private alertService: AlertService,
     private router: Router,
     private http: HttpClient,

@@ -10,42 +10,42 @@ import { Lizenz, Merkmale } from "../enums/enums.service";
 export class MockingService {
   constructor() { }
 
-  private trainer1: User = new User(
-    0,
-    "Löwi@fussball-trainer.de",
-    "Jogi Löwi",
-    new Date("1979-01-16"),
-    Lizenz.A_LIZENZ,
-    null,
-    null
-  );
-  private trainer2: User = new User(
-    1,
-    "derKaiser@fussball-trainer.de",
-    "Thomi Gottschalk",
-    new Date("1954-05-03"),
-    Lizenz.B_LIZENZ,
-    null,
-    null
-  );
-  private trainer3: User = new User(
-    2,
-    "Pudelski@fussball-trainer.de",
-    "Patryk Pudelski",
-    new Date("1999-06-29"),
-    Lizenz.FUSSBALLLEHRER,
-    null,
-    null
-  );
-  private trainer4: User = new User(
-    3,
-    "nkloss@fh-bielefeld.de",
-    "Nikolai Kloß",
-    new Date("1991-08-29"),
-    Lizenz.A_LIZENZ,
-    null,
-    null
-  );
+  private trainer1: User = {
+    id: 0,
+    mail: "Löwi@fussball-trainer.de",
+    name: "Jogi Löwi",
+    birth: new Date("1979-01-16"),
+    lizenz: Lizenz.A_LIZENZ,
+    teams: null,
+    exercises: null
+  };
+  private trainer2: User = {
+    id: 1,
+    mail: "derKaiser@fussball-trainer.de",
+    name: "Thomi Gottschalk",
+    birth: new Date("1954-05-03"),
+    lizenz: Lizenz.B_LIZENZ,
+    teams: null,
+    exercises: null
+  };
+  private trainer3: User = {
+    id: 2,
+    mail: "Pudelski@fussball-trainer.de",
+    name: "Patryk Pudelski",
+    birth: new Date("1999-06-29"),
+    lizenz: Lizenz.FUSSBALLLEHRER,
+    teams: null,
+    exercises: null
+  };
+  private trainer4: User = {
+    id: 3,
+    mail: "nkloss@fh-bielefeld.de",
+    name: "Nikolai Kloß",
+    birth: new Date("1991-08-29"),
+    lizenz: Lizenz.A_LIZENZ,
+    teams: null,
+    exercises: null
+  };
 
   trainers: User[] = [this.trainer1, this.trainer2, this.trainer3, this.trainer4];
 

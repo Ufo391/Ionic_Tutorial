@@ -28,7 +28,6 @@ export class LoginPage implements OnInit {
   ngOnInit() { }
 
   navigateToTeamsPage(user: firebase.User) {
-    debugger;
     this.apiService.getAPI().login(user.email, user.uid).then(() => {
       this.router.navigate(["/teams"]);
       this.clearInputs();
