@@ -23,6 +23,7 @@ export class TeamsPage implements OnInit {
     private http: HttpClient,
   ) {
     this.setCurrentUser();
+    this.alertService.showInformation("", "" + this.authService.getUser().teams.length);
   }
 
   ngOnInit() {

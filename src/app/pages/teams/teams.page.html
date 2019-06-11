@@ -14,13 +14,35 @@
 </ion-header>
 
 <ion-tabs>
-    <ion-content>
-        <ion-button *ngIf="authService.getUser().teams.length >= 1" expand="full" class="mannschaft-buttons">Mannschaft 1</ion-button>
-        <ion-button *ngIf="authService.getUser().teams.length >= 2" expand="full" class="mannschaft-buttons">Mannschaft 2</ion-button>
-        <ion-button *ngIf="authService.getUser().teams.length >= 3" expand="full" class="mannschaft-buttons">Mannschaft 3</ion-button>
-        <ion-button *ngIf="authService.getUser().teams.length >= 4" expand="full" class="mannschaft-buttons" >Mannschaft 4</ion-button>
-      </ion-content>
+  <ion-content>
+    <ion-button
+      *ngIf="authService.getUser().teams.length >= 1"
+      expand="full"
+      class="mannschaft-buttons"
+      >Mannschaft 1</ion-button
+    >
+    <ion-button
+      *ngIf="authService.getUser().teams.length >= 2"
+      expand="full"
+      class="mannschaft-buttons"
+      >Mannschaft 2</ion-button
+    >
+    <ion-button
+      *ngIf="authService.getUser().teams.length >= 3"
+      expand="full"
+      class="mannschaft-buttons"
+      >Mannschaft 3</ion-button
+    >
+    <ion-button
+      *ngIf="authService.getUser().teams.length >= 4"
+      expand="full"
+      class="mannschaft-buttons"
+      >Mannschaft 4</ion-button
+    >
+  </ion-content>
 
+  <ion-button>Neuer Spieler</ion-button>
+  <ion-button *ngIf="authService.getUser().teams.length < 4">Neue Mannschaft</ion-button>
   <ion-button (click)="logout()" [routerLink]="['/login']"
     >Ausloggen</ion-button
   >
@@ -28,7 +50,7 @@
     <ion-tab-button tab="mannschaft">
       <ion-icon name="contacts"></ion-icon>
       <ion-label>Mannschaft</ion-label>
-    </ion-tab-button>    
+    </ion-tab-button>
     <ion-tab-button tab="ueberblick" [routerLink]="['/overview']">
       <ion-icon name="eye"></ion-icon>
       <ion-label>Überblick</ion-label>

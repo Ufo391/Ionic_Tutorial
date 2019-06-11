@@ -2,13 +2,14 @@ import { Injectable } from "@angular/core";
 import { Player } from "src/app/model/player.model";
 import { Address } from "src/app/model/address.model";
 import { User } from "src/app/model/user.model";
-import { Lizenz, Merkmale } from "../enums/enums.service";
+import { Lizenz, Merkmale, EnumsService, TAltersklasse, TLiga } from "../enums/enums.service";
+import { Team } from 'src/app/model/team.model';
 
 @Injectable({
   providedIn: "root"
 })
 export class MockingService {
-  constructor() { }
+  constructor(private enumService: EnumsService) { }
 
   private trainer1: User = {
     id: 0,
@@ -16,8 +17,8 @@ export class MockingService {
     name: "Jogi Löwi",
     birth: new Date("1979-01-16"),
     lizenz: Lizenz.A_LIZENZ,
-    teams: null,
-    exercises: null
+    teams: [],
+    exercises: []
   };
   private trainer2: User = {
     id: 1,
@@ -25,8 +26,8 @@ export class MockingService {
     name: "Thomi Gottschalk",
     birth: new Date("1954-05-03"),
     lizenz: Lizenz.B_LIZENZ,
-    teams: null,
-    exercises: null
+    teams: [],
+    exercises: []
   };
   private trainer3: User = {
     id: 2,
@@ -34,8 +35,8 @@ export class MockingService {
     name: "Patryk Pudelski",
     birth: new Date("1999-06-29"),
     lizenz: Lizenz.FUSSBALLLEHRER,
-    teams: null,
-    exercises: null
+    teams: [{ alterklasse: TAltersklasse.U18, id: 0, liga: TLiga.KREISLIGA, name: "FC Entenhausen" }],
+    exercises: []
   };
   private trainer4: User = {
     id: 3,
@@ -43,8 +44,8 @@ export class MockingService {
     name: "Nikolai Kloß",
     birth: new Date("1991-08-29"),
     lizenz: Lizenz.A_LIZENZ,
-    teams: null,
-    exercises: null
+    teams: [],
+    exercises: []
   };
 
   trainers: User[] = [this.trainer1, this.trainer2, this.trainer3, this.trainer4];
