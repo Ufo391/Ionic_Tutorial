@@ -20,4 +20,8 @@ export class User {
         this.teams = teams;
         this.exercises = exercises;
     }
+
+    public getMail(): string{
+        return this.mail;
+    }
 }

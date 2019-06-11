@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { auth } from "firebase";
 import { AlertService } from "../alert/alert.service";
+import { User } from 'src/app/model/user.model';
 
 @Injectable({
   providedIn: "root"
@@ -9,6 +10,7 @@ import { AlertService } from "../alert/alert.service";
 export class AuthService {
   private firebaseUser: firebase.User;
   private authToken: string;
+  private user: User;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -27,19 +29,24 @@ export class AuthService {
       });
   }
 
-  getUser(): firebase.User {
+  getFirebaseUser(): firebase.User {
     return this.firebaseUser;
+  }
+
+  getUser(): User {
+    return this.user;
   }
 
   getAuthToken(): string {
     return this.authToken;
   }
 
-  setAuthToken(token: string): void {
+  setAuthToken(token: string, user: User): void {
     if (this.authToken !== undefined) {
       throw new Error('Ungültige Modifizierung!');
     } else {
       this.authToken = token;
+      this.user = user;
     }
   }
 
