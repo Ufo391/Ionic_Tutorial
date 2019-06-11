@@ -1,23 +1,35 @@
-import { IAPICall } from '../api/api.interface';
+import { AbstractServerAPI } from '../api/api.abstract';
 import { User } from "../../model/user.model";
 import { MockingService } from './mocking.service';
+import { reject } from 'q';
+import { AuthService } from '../auth/athentification.service';
 
-export class APIMock implements IAPICall {
+export class APIMock extends AbstractServerAPI {
 
-    constructor(private mockingService: MockingService) { }
+    constructor(private mockingService: MockingService, authService: AuthService) {
+        super(authService);
+    }
 
-    login(email: string, firebirdID: string): User {
+    getUser(email: string, firebirdID: string): Promise<User> {
         return this.findUser(email);
     }
 
-    private findUser(email: string): User {
-        this.mockingService.trainers.forEach((value: User) => {
-            if (value.getMail() === email) {
-                return value;
+    getToken(user: User): string {
+        return 'geheimesTokenVon:' + user.getMail();
+    }
+
+    private async findUser(email: string): Promise<User> {
+
+        let result: User = null;
+        const promises = this.mockingService.trainers.map((trainer: User) => {
+            if (trainer.getMail() === email) {
+                result = trainer;
             }
         });
 
-        return null;
-    }
+        await Promise.all(promises);
 
+        debugger;
+        return result;
+    }
 }

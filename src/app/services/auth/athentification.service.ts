@@ -37,6 +37,10 @@ export class AuthService {
     return this.user;
   }
 
+  setUser(user: User): void {
+    this.user = user;
+  }
+
   getAuthToken(): string {
     return this.authToken;
   }

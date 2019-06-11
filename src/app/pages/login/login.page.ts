@@ -4,6 +4,7 @@ import { AlertService } from "../../services/alert/alert.service";
 import { AuthService } from "../../services/auth/athentification.service";
 import { ApiService } from 'src/app/services/api/api.service';
 import { LoginResponse } from 'src/app/responses/response.interfaces';
+import { User } from '../../model/user.model';
 
 @Component({
   selector: "app-login",
@@ -27,20 +28,13 @@ export class LoginPage implements OnInit {
   ngOnInit() { }
 
   navigateToTeamsPage(user: firebase.User) {
-
-    const that = this;
-    this.apiService.login(user.email, user.uid).subscribe((res: LoginResponse) => {
-
-      that.authService.setAuthToken(res.token);
-      // erzeuge hier eine neue Instanz des Trainers via API Call !!!
-      hier weiter machen
-      that.router.navigate(["/teams"]);
-      that.clearInputs();
-
-    }, error => {
-      that.alertService.errorAuthProcess(error);
+    debugger;
+    this.apiService.getAPI().login(user.email, user.uid).then(() => {
+      this.router.navigate(["/teams"]);
+      this.clearInputs();
+    }).catch(error => {
+      this.alertService.errorAuthProcess(error);
     });
-
   }
 
   setCurrentUser() {

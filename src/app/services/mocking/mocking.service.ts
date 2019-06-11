@@ -8,7 +8,7 @@ import { Lizenz, Merkmale } from "../enums/enums.service";
   providedIn: "root"
 })
 export class MockingService {
-  constructor() {}
+  constructor() { }
 
   private trainer1: User = new User(
     0,
@@ -37,14 +37,23 @@ export class MockingService {
     null,
     null
   );
+  private trainer4: User = new User(
+    3,
+    "nkloss@fh-bielefeld.de",
+    "Nikolai Kloß",
+    new Date("1991-08-29"),
+    Lizenz.A_LIZENZ,
+    null,
+    null
+  );
 
-  trainers: User[] = [this.trainer1, this.trainer2, this.trainer3];
+  trainers: User[] = [this.trainer1, this.trainer2, this.trainer3, this.trainer4];
 
   players: Player[] = [
     {
       id: 1,
       name: "Hans Sarpei",
-      birth: new Date(1991, 8, 29),
+      birth: new Date(1991, 3, 26),
       address: new Address(
         "Ligusterweg",
         "23a",
@@ -108,6 +117,6 @@ export class MockingService {
           value: 6
         }
       ]
-    }
+    },
   ];
 }
