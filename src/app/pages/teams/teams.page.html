@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-tabs>
-  <ion-content *ngIf="this.mode == 0">
+  <ion-content *ngIf="this.mode === this.enumMode.SELECTION">
     <ion-button
       *ngIf="authService.getUser().teams.length >= 1"
       expand="full"
@@ -41,7 +41,7 @@
     >
   </ion-content>
 
-  <ion-content *ngIf="this.mode == 1">
+  <ion-content *ngIf="this.mode === this.enumMode.CREATE_TEAM">
     <ion-list>
       <ion-item>
         <ion-input type="text" placeholder="Name"></ion-input>
@@ -55,7 +55,7 @@
     </ion-list>
   </ion-content>
 
-  <ion-content *ngIf="this.mode == 2">
+  <ion-content *ngIf="this.mode === this.enumMode.CREATE_PLAYER">
     <ion-label>Neuer Spieler</ion-label>
   </ion-content>
 

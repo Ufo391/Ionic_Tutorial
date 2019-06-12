@@ -7,7 +7,7 @@ import { Team } from '../../model/team.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { TAltersklasse, TLiga } from 'src/app/services/enums/enums.service';
 
-enum ENUM_MODE { SELECTION = 0, CREATE_TEAM = 1, CREATE_PLAYER = 2 }
+enum ENUM_MODE { SELECTION, CREATE_TEAM, CREATE_PLAYER }
 
 @Component({
   selector: "app-teams",
@@ -18,6 +18,8 @@ enum ENUM_MODE { SELECTION = 0, CREATE_TEAM = 1, CREATE_PLAYER = 2 }
 export class TeamsPage implements OnInit {
   user: firebase.User;
   mode: ENUM_MODE;
+
+  enumMode = ENUM_MODE;
 
   // Inputfields
 
