@@ -20,6 +20,7 @@ export class TeamsPage implements OnInit {
   mode: ENUM_MODE;
 
   enumMode = ENUM_MODE;
+  selectedAltersklasse: ENUM_MODE;
 
   // Inputfields
 

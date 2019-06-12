@@ -121,6 +121,26 @@ export enum MerkmalTyp {
 
 export class EnumsService {
 
-  constructor() { }
+  constructor() {
+
+    this.altersklassenMap = this.buildEnumMap(TAltersklasse);    
+  }
+
+  Hier weiter machen --> Ummappen von ENUM auf HashMap um einfacherer Verknüpfung auf Page zu implementieren bei Auswahl der jweiligen Altersklasse
+
+  public altersklassen: Map<string, TAltersklasse>;
+
+  private buildEnumMap<T>(_enum: T) {
+    let result: Map<string, T>;
+    let key: string;
+    for (const value in _enum) {
+      debugger;
+      key = "" + _enum[value];
+      result.set(key,value);
+      debugger;
+    }
+
+    return result;
+  }
 
 }

@@ -48,9 +48,16 @@
       </ion-item>
       <ion-item>
         <ion-label>Altersklasse:</ion-label>
-        <ion-select>
-          <ion-select-option>{{ "dummy" }}</ion-select-option>
+
+        <ion-select [(ngModel)]="selectedAltersklasse">
+          <ion-select-option
+            *ngFor="let alter of enumMode"
+            [value]="alter"
+            >{{ "" + alter }}</ion-select-option
+          >
         </ion-select>
+
+
       </ion-item>
     </ion-list>
   </ion-content>
