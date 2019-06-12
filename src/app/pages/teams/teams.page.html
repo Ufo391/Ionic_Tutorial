@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-tabs>
-  <ion-content>
+  <ion-content *ngIf="this.mode == 0">
     <ion-button
       *ngIf="authService.getUser().teams.length >= 1"
       expand="full"
@@ -41,13 +41,35 @@
     >
   </ion-content>
 
-  <ion-button>Neuer Spieler</ion-button>
-  <ion-button *ngIf="authService.getUser().teams.length < 4">Neue Mannschaft</ion-button>
+  <ion-content *ngIf="this.mode == 1">
+    <ion-list>
+      <ion-item>
+        <ion-input type="text" placeholder="Name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Altersklasse:</ion-label>
+        <ion-select>
+          <ion-select-option>{{ "dummy" }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+  <ion-content *ngIf="this.mode == 2">
+    <ion-label>Neuer Spieler</ion-label>
+  </ion-content>
+
+  <ion-button (click)="onNewPlayerClick()">Neuer Spieler</ion-button>
+  <ion-button
+    (click)="onNewTeamClick()"
+    *ngIf="authService.getUser().teams.length < 4"
+    >Neue Mannschaft</ion-button
+  >
   <ion-button (click)="logout()" [routerLink]="['/login']"
     >Ausloggen</ion-button
   >
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="mannschaft">
+    <ion-tab-button tab="mannschaft" (click)="this.onButtonTabTeamClick()">
       <ion-icon name="contacts"></ion-icon>
       <ion-label>Mannschaft</ion-label>
     </ion-tab-button>

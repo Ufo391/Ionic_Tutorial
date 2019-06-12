@@ -5,16 +5,37 @@ import { Observable } from 'rxjs';
 import { Router } from "@angular/router";
 import { Team } from '../../model/team.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { TAltersklasse, TLiga } from 'src/app/services/enums/enums.service';
+
+enum ENUM_MODE { SELECTION = 0, CREATE_TEAM = 1, CREATE_PLAYER = 2 }
 
 @Component({
   selector: "app-teams",
   templateUrl: "./teams.page.html",
   styleUrls: ["./teams.page.scss"]
 })
+
 export class TeamsPage implements OnInit {
   user: firebase.User;
-  teams$: Observable<Team[]>;
-  uid: Observable<string>;
+  mode: ENUM_MODE;
+
+  // Inputfields
+
+  // Player
+  name: string;
+  isWoman: boolean;
+  birth: Date;
+
+  // Address
+  street: string;
+  streetnumber: string;
+  postcode: number;
+  town: string;
+  phone: string;
+
+  //Team  
+  alterklasse: TAltersklasse;
+  liga: TLiga;
 
   constructor(
     public authService: AuthService,
@@ -22,18 +43,11 @@ export class TeamsPage implements OnInit {
     private router: Router,
     private http: HttpClient,
   ) {
+    this.mode = ENUM_MODE.SELECTION;
     this.setCurrentUser();
-    this.alertService.showInformation("", "" + this.authService.getUser().teams.length);
   }
 
-  ngOnInit() {
-    const params = new HttpParams()
-      .set('authtoken', 'uid');
-
-    const uri = 'https://virtserver.swaggerhub.com/AHeinisch/trainingsplaner/1.0.1/api/Team';
-
-    this.teams$ = this.http.get<Team[]>(uri, { params });
-  }
+  ngOnInit() { }
 
   setCurrentUser() {
     this.authService.getLoggedInUser().subscribe(user => {
@@ -43,6 +57,18 @@ export class TeamsPage implements OnInit {
         this.router.navigate(["/login"]);
       }
     });
+  }
+
+  onNewTeamClick() {
+    this.mode = ENUM_MODE.CREATE_TEAM;
+  }
+
+  onNewPlayerClick() {
+    this.mode = ENUM_MODE.CREATE_PLAYER;
+  }
+
+  onButtonTabTeamClick() {
+    this.mode = ENUM_MODE.SELECTION;
   }
 
   logout() {

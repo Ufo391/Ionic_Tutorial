@@ -35,7 +35,7 @@ export class MockingService {
     name: "Patryk Pudelski",
     birth: new Date("1999-06-29"),
     lizenz: Lizenz.FUSSBALLLEHRER,
-    teams: [{ alterklasse: TAltersklasse.U18, id: 0, liga: TLiga.KREISLIGA, name: "FC Entenhausen" }],
+    teams: [],
     exercises: []
   };
   private trainer4: User = {
@@ -44,7 +44,9 @@ export class MockingService {
     name: "Nikolai Kloß",
     birth: new Date("1991-08-29"),
     lizenz: Lizenz.A_LIZENZ,
-    teams: [],
+    teams: [
+      { alterklasse: TAltersklasse.U18, id: 0, liga: TLiga.KREISLIGA, name: "FC Entenhausen" }
+    ],
     exercises: []
   };
 
