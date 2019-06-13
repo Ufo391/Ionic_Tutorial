@@ -18,7 +18,6 @@ enum ENUM_MODE { SELECTION, CREATE_TEAM, CREATE_PLAYER }
 })
 
 export class TeamsPage implements OnInit {
-  user: firebase.User;
   mode: ENUM_MODE;
 
   enumVisibilityMode = ENUM_MODE;
@@ -64,7 +63,7 @@ export class TeamsPage implements OnInit {
   setCurrentUser() {
     this.authService.getLoggedInUser().subscribe(user => {
       if (user !== null) {
-        this.user = user;
+// nötig ?
       } else {
         this.router.navigate(["/login"]);
       }
@@ -87,17 +86,14 @@ export class TeamsPage implements OnInit {
 
   onButtonTeamClick(index: number) {
     this.userService.selectedTeam = this.userService.user.teams[index];
+    this.router.navigate(["/overview"]);
   }
 
-  onTabButtonOverviewClick() {
+  onTabButtonClick(routeTarget: string) {
     if (this.userService.selectedTeam !== undefined) {
-      this.router.navigate(["/overview"]);
-    }
-  }
-
-  onTabButtonPlanerClick() {
-    if (this.userService.selectedTeam !== undefined) {
-      this.router.navigate(["/planer"]);
+      this.router.navigate([routeTarget]);
+    } else {
+      this.alertService.showInformation("Achtung:", "Bitte wählen sie zuerst eine Mannschaft aus!");
     }
   }
 

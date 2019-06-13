@@ -20,28 +20,28 @@
       expand="full"
       class="mannschaft-buttons"
       (click)="onButtonTeamClick(0)"
-      >Mannschaft 1</ion-button
+      >{{this.userService.user.teams[0].name}}</ion-button
     >
     <ion-button
       *ngIf="userService.user.teams.length >= 2"
       expand="full"
       class="mannschaft-buttons"
       (click)="onButtonTeamClick(1)"
-      >Mannschaft 2</ion-button
+      >{{this.userService.user.teams[1].name}}</ion-button
     >
     <ion-button
       *ngIf="userService.user.teams.length >= 3"
       expand="full"
       class="mannschaft-buttons"
       (click)="onButtonTeamClick(2)"
-      >Mannschaft 3</ion-button
+      >{{this.userService.user.teams[2].name}}</ion-button
     >
     <ion-button
       *ngIf="userService.user.teams.length >= 4"
       expand="full"
       class="mannschaft-buttons"
       (click)="onButtonTeamClick(3)"
-      >Mannschaft 4</ion-button
+      >{{this.userService.user.teams[3].name}}</ion-button
     >
   </ion-content>
 
@@ -103,12 +103,12 @@
       <ion-icon name="contacts"></ion-icon>
       <ion-label>Mannschaft</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="ueberblick" (click)="onTabButtonOverviewClick()">
+    <ion-tab-button tab="ueberblick" (click)="onTabButtonClick('/overview')">
       <ion-icon name="eye"></ion-icon>
       <ion-label>Überblick</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="trainingsplaner" (click)="onTabButtonPlanerClick()">
+    <ion-tab-button tab="trainingsplaner" (click)="onTabButtonClick('/planer')">
       <ion-icon name="clipboard"></ion-icon>
       <ion-label>Trainingsplaner</ion-label>
     </ion-tab-button>
