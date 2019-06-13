@@ -9,7 +9,8 @@ import { Team } from 'src/app/model/team.model';
   providedIn: "root"
 })
 export class MockingService {
-  constructor(private enumService: EnumsService) { }
+  constructor(private enumService: EnumsService) {
+  }
 
   private trainer1: User = {
     id: 0,
@@ -45,12 +46,69 @@ export class MockingService {
     birth: new Date("1991-08-29"),
     lizenz: Lizenz.A_LIZENZ,
     teams: [
-      { alterklasse: TAltersklasse.U18, id: 0, liga: TLiga.KREISLIGA, name: "FC Entenhausen" }
+      {
+        alterklasse: TAltersklasse.U18, id: 0, liga: TLiga.KREISLIGA, name: "FC Entenhausen", players: [
+          {
+            id: 3,
+            name: "Donald Duck",
+            birth: new Date(1981, 3, 26),
+            address: new Address(
+              "Hannesfriedhof",
+              "233a",
+              684654,
+              "Rudiwald",
+              "0176-654654"
+            ),
+            isWoman: false,
+            memo: "Quak!",
+            properties: [
+              {
+                creator: this.trainer1,
+                creatorDate: new Date(Date.now()),
+                typ: Merkmale.GEWICHT,
+                value: 95
+              },
+              {
+                creator: this.trainer1,
+                creatorDate: new Date(Date.now()),
+                typ: Merkmale.GROESSE,
+                value: 195
+              },
+              {
+                creator: this.trainer1,
+                creatorDate: new Date(Date.now()),
+                typ: Merkmale.SCHUSSKRAFT,
+                value: 9
+              }
+            ]
+          }
+        ]
+      }
     ],
     exercises: []
   };
 
   public trainers: User[] = [this.trainer1, this.trainer2, this.trainer3, this.trainer4];
+
+  public getPlayerById(id: number): Player {
+    this.players.forEach((element) => {
+      if (element.id === id) {
+        return element;
+      }
+    });
+
+    return undefined;
+  }
+
+  public getUserById(id: number): User {
+    this.trainers.forEach((element) => {
+      if (element.id === id) {
+        return element;
+      }
+    });
+
+    return undefined;
+  }
 
   players: Player[] = [
     {

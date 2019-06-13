@@ -63,7 +63,7 @@ export class TeamsPage implements OnInit {
   setCurrentUser() {
     this.authService.getLoggedInUser().subscribe(user => {
       if (user !== null) {
-// nötig ?
+        // nötig ?
       } else {
         this.router.navigate(["/login"]);
       }
@@ -107,7 +107,7 @@ export class TeamsPage implements OnInit {
   }
 
   createNewTeam(name: string, alterklasse: TAltersklasse, liga: TLiga) {
-    let team: Team = { alterklasse, liga, name, id: (Math.floor(Math.random() * 1000) + 5) };
+    let team: Team = { alterklasse, liga, name, id: (Math.floor(Math.random() * 1000) + 5), players: [] };
     this.userService.user.teams.push(team);
   }
 

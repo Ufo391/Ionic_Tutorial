@@ -18,7 +18,7 @@ export class OverviewPage implements OnInit {
     private mockingService: MockingService,
     public userService: UserService
   ) {
-    this.players = mockingService.players;
+    this.players = userService.selectedTeam.players;
   }
 
   players: Player[];
