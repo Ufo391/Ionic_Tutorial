@@ -50,7 +50,7 @@ export class MockingService {
     exercises: []
   };
 
-  trainers: User[] = [this.trainer1, this.trainer2, this.trainer3, this.trainer4];
+  public trainers: User[] = [this.trainer1, this.trainer2, this.trainer3, this.trainer4];
 
   players: Player[] = [
     {

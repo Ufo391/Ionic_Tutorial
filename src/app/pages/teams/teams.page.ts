@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { Team } from '../../model/team.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { TAltersklasse, TLiga, EnumsService } from 'src/app/services/enums/enums.service';
+import { MockingService } from 'src/app/services/mocking/mocking.service';
 
 enum ENUM_MODE { SELECTION, CREATE_TEAM, CREATE_PLAYER }
 
@@ -22,10 +23,9 @@ export class TeamsPage implements OnInit {
   enumVisibilityMode = ENUM_MODE;
 
   altersklassenOptions = this.enumService.GetENUMValues(TAltersklasse);
-  altersklasseSelected;
 
   ligaOptions = this.enumService.GetENUMValues(TLiga);
-  ligaSelected;
+
 
   // Inputfields
 
@@ -42,7 +42,7 @@ export class TeamsPage implements OnInit {
   phone: string;
 
   //Team  
-  alterklasse: TAltersklasse;
+  altersklasse: TAltersklasse;
   liga: TLiga;
 
   constructor(
@@ -50,7 +50,8 @@ export class TeamsPage implements OnInit {
     private alertService: AlertService,
     private router: Router,
     private http: HttpClient,
-    private enumService: EnumsService
+    private enumService: EnumsService,
+    private mockingService: MockingService
   ) {
     this.mode = ENUM_MODE.SELECTION;
     this.setCurrentUser();
@@ -71,8 +72,8 @@ export class TeamsPage implements OnInit {
   private resetInputs(): void {
     this.name = "";
 
-    this.altersklasseSelected = undefined;
-    this.ligaSelected = undefined;
+    this.altersklasse = undefined;
+    this.liga = undefined;
   }
 
   onNewTeamClick() {
@@ -84,11 +85,14 @@ export class TeamsPage implements OnInit {
   }
 
   submitNewTeam() {
+    this.createNewTeam(this.name, this.altersklasse, this.liga);
     this.resetPageToDefaultView();
-    throw new Error('noch nicht Implementiert!');
   }
 
-
+  createNewTeam(name: string, alterklasse: TAltersklasse, liga: TLiga) {
+    let team: Team = { alterklasse, liga, name, id: (Math.floor(Math.random() * 1000) + 5) };
+    this.authService.getUser().teams.push(team);
+  }
 
   resetPageToDefaultView() {
     this.mode = ENUM_MODE.SELECTION;

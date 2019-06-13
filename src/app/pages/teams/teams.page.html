@@ -48,7 +48,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Altersklasse:</ion-label>
-        <ion-select [(ngModel)]="altersklasseSelected">
+        <ion-select [(ngModel)]="altersklasse">
           <ion-select-option
             *ngFor="let selection of altersklassenOptions"
             [value]="selection"
@@ -58,7 +58,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Liga:</ion-label>
-        <ion-select [(ngModel)]="ligaSelected">
+        <ion-select [(ngModel)]="liga">
           <ion-select-option
             *ngFor="let selection of ligaOptions"
             [value]="selection"
