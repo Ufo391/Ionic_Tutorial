@@ -72,8 +72,7 @@ export class TeamsPage implements OnInit {
   }
 
   private resetInputs(): void {
-    this.name = "";
-
+    this.name = undefined;
     this.altersklasse = undefined;
     this.liga = undefined;
   }
@@ -90,9 +89,25 @@ export class TeamsPage implements OnInit {
     this.userService.selectedTeam = this.userService.user.teams[index];
   }
 
+  onTabButtonOverviewClick() {
+    if (this.userService.selectedTeam !== undefined) {
+      this.router.navigate(["/overview"]);
+    }
+  }
+
+  onTabButtonPlanerClick() {
+    if (this.userService.selectedTeam !== undefined) {
+      this.router.navigate(["/planer"]);
+    }
+  }
+
   submitNewTeam() {
-    this.createNewTeam(this.name, this.altersklasse, this.liga);
-    this.resetPageToDefaultView();
+    if (this.name !== undefined && this.altersklasse !== undefined && this.liga !== undefined) {
+      this.createNewTeam(this.name, this.altersklasse, this.liga);
+      this.resetPageToDefaultView();
+    } else {
+      this.alertService.errorEmptyInputs();
+    }
   }
 
   createNewTeam(name: string, alterklasse: TAltersklasse, liga: TLiga) {

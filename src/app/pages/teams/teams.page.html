@@ -103,12 +103,12 @@
       <ion-icon name="contacts"></ion-icon>
       <ion-label>Mannschaft</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="ueberblick" [routerLink]="['/overview']">
+    <ion-tab-button tab="ueberblick" (click)="onTabButtonOverviewClick()">
       <ion-icon name="eye"></ion-icon>
       <ion-label>Überblick</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="trainingsplaner" [routerLink]="['/planer']">
+    <ion-tab-button tab="trainingsplaner" (click)="onTabButtonPlanerClick()">
       <ion-icon name="clipboard"></ion-icon>
       <ion-label>Trainingsplaner</ion-label>
     </ion-tab-button>
