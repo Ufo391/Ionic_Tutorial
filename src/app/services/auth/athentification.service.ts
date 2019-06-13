@@ -3,6 +3,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { auth } from "firebase";
 import { AlertService } from "../alert/alert.service";
 import { User } from 'src/app/model/user.model';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: "root"
@@ -10,11 +11,11 @@ import { User } from 'src/app/model/user.model';
 export class AuthService {
   private firebaseUser: firebase.User;
   private authToken: string;
-  private user: User;
 
   constructor(
     private afAuth: AngularFireAuth,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private userService: UserService
   ) { }
 
   loginGoogle(navigateCallback) {
@@ -33,14 +34,6 @@ export class AuthService {
     return this.firebaseUser;
   }
 
-  getUser(): User {
-    return this.user;
-  }
-
-  setUser(user: User): void {
-    this.user = user;
-  }
-
   getAuthToken(): string {
     return this.authToken;
   }
@@ -50,7 +43,7 @@ export class AuthService {
       throw new Error('Ungültige Modifizierung!');
     } else {
       this.authToken = token;
-      this.user = user;
+      this.userService.user = user;
     }
   }
 

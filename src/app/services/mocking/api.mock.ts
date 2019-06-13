@@ -3,11 +3,12 @@ import { User } from "../../model/user.model";
 import { MockingService } from './mocking.service';
 import { reject } from 'q';
 import { AuthService } from '../auth/athentification.service';
+import { UserService } from '../user/user.service';
 
 export class APIMock extends AbstractServerAPI {
 
-    constructor(private mockingService: MockingService, authService: AuthService) {
-        super(authService);
+    constructor(private mockingService: MockingService, authService: AuthService, userService: UserService) {
+        super(authService, userService);
     }
 
     getUser(email: string, firebirdID: string): Promise<User> {

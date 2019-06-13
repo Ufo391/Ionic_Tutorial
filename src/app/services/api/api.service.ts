@@ -5,6 +5,7 @@ import { AbstractServerAPI } from './api.abstract';
 import { APIMock } from '../mocking/api.mock';
 import { MockingService } from '../mocking/mocking.service';
 import { AuthService } from '../auth/athentification.service';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class ApiService {
 
   private serverAPI: AbstractServerAPI;
 
-  constructor(private http: HttpClient, private mockingService: MockingService, private authService: AuthService) {
-    this.serverAPI = new APIMock(this.mockingService, this.authService);
+  constructor(private http: HttpClient, private mockingService: MockingService, private authService: AuthService, private userService: UserService) {
+    this.serverAPI = new APIMock(this.mockingService, this.authService, this.userService);
   }
 
   public getAPI(): AbstractServerAPI {

@@ -1,9 +1,10 @@
 import { User } from 'src/app/model/user.model';
 import { AuthService } from '../auth/athentification.service';
+import { UserService } from '../user/user.service';
 
 export abstract class AbstractServerAPI {
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService, private userService: UserService) { }
 
     async login(email: string, firebirdID: string): Promise<void> {
         const result: User = await this.getUser(email, firebirdID);
@@ -11,7 +12,7 @@ export abstract class AbstractServerAPI {
             throw new Error('Der Benutzer mit der E-Mail-Adresse \"' + email + '\" existiert nicht!');
         } else {
             this.authService.setAuthToken(this.getToken(result), result);
-            this.authService.setUser(result);
+            this.userService.user = result;
         }
     }
 
