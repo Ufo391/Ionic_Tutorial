@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Router } from "@angular/router";
 import { Team } from '../../model/team.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { TAltersklasse, TLiga } from 'src/app/services/enums/enums.service';
+import { TAltersklasse, TLiga, EnumsService } from 'src/app/services/enums/enums.service';
 
 enum ENUM_MODE { SELECTION, CREATE_TEAM, CREATE_PLAYER }
 
@@ -19,8 +19,13 @@ export class TeamsPage implements OnInit {
   user: firebase.User;
   mode: ENUM_MODE;
 
-  enumMode = ENUM_MODE;
-  selectedAltersklasse: ENUM_MODE;
+  enumVisibilityMode = ENUM_MODE;
+
+  altersklassenOptions = this.enumService.GetENUMValues(TAltersklasse);
+  altersklasseSelected;
+
+  ligaOptions = this.enumService.GetENUMValues(TLiga);
+  ligaSelected;
 
   // Inputfields
 
@@ -45,6 +50,7 @@ export class TeamsPage implements OnInit {
     private alertService: AlertService,
     private router: Router,
     private http: HttpClient,
+    private enumService: EnumsService
   ) {
     this.mode = ENUM_MODE.SELECTION;
     this.setCurrentUser();
@@ -62,6 +68,13 @@ export class TeamsPage implements OnInit {
     });
   }
 
+  private resetInputs(): void {
+    this.name = "";
+
+    this.altersklasseSelected = undefined;
+    this.ligaSelected = undefined;
+  }
+
   onNewTeamClick() {
     this.mode = ENUM_MODE.CREATE_TEAM;
   }
@@ -70,8 +83,16 @@ export class TeamsPage implements OnInit {
     this.mode = ENUM_MODE.CREATE_PLAYER;
   }
 
-  onButtonTabTeamClick() {
+  submitNewTeam() {
+    this.resetPageToDefaultView();
+    throw new Error('noch nicht Implementiert!');
+  }
+
+
+
+  resetPageToDefaultView() {
     this.mode = ENUM_MODE.SELECTION;
+    this.resetInputs();
   }
 
   logout() {
