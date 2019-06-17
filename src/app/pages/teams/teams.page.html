@@ -20,35 +20,39 @@
       expand="full"
       class="mannschaft-buttons"
       (click)="onButtonTeamClick(0)"
-      >{{this.userService.user.teams[0].name}}</ion-button
+      >{{ this.userService.user.teams[0].name }}</ion-button
     >
     <ion-button
       *ngIf="userService.user.teams.length >= 2"
       expand="full"
       class="mannschaft-buttons"
       (click)="onButtonTeamClick(1)"
-      >{{this.userService.user.teams[1].name}}</ion-button
+      >{{ this.userService.user.teams[1].name }}</ion-button
     >
     <ion-button
       *ngIf="userService.user.teams.length >= 3"
       expand="full"
       class="mannschaft-buttons"
       (click)="onButtonTeamClick(2)"
-      >{{this.userService.user.teams[2].name}}</ion-button
+      >{{ this.userService.user.teams[2].name }}</ion-button
     >
     <ion-button
       *ngIf="userService.user.teams.length >= 4"
       expand="full"
       class="mannschaft-buttons"
       (click)="onButtonTeamClick(3)"
-      >{{this.userService.user.teams[3].name}}</ion-button
+      >{{ this.userService.user.teams[3].name }}</ion-button
     >
   </ion-content>
 
   <ion-content *ngIf="this.mode === this.enumVisibilityMode.CREATE_TEAM">
     <ion-list>
       <ion-item>
-        <ion-input type="text" placeholder="Name" [(ngModel)]="name"></ion-input>
+        <ion-input
+          type="text"
+          placeholder="Name"
+          [(ngModel)]="name"
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Altersklasse:</ion-label>
@@ -77,7 +81,9 @@
               <ion-button (click)="submitNewTeam()">Übernehmen</ion-button>
             </ion-col>
             <ion-col>
-              <ion-button (click)="resetPageToDefaultView()">Abbrechen</ion-button>
+              <ion-button (click)="resetPageToDefaultView()"
+                >Abbrechen</ion-button
+              >
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -86,7 +92,61 @@
   </ion-content>
 
   <ion-content *ngIf="this.mode === this.enumVisibilityMode.CREATE_PLAYER">
-    <ion-label>Neuer Spieler</ion-label>
+    <ion-list>
+      <ion-item>
+        <ion-input
+          type="text"
+          placeholder="Name"
+          [(ngModel)]="name"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-datetime
+          [(ngModel)]="birth"
+          displayFormat="DD.MM.YYYY"
+          placeholder="Geburtstag"
+        ></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Ist Weiblich:</ion-label>
+        <ion-toggle [(ngModel)]="isWoman"></ion-toggle>
+      </ion-item>
+    </ion-list>
+    <ion-item>
+        <ion-input
+          type="text"
+          placeholder="Straße"
+          [(ngModel)]="street"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-input
+            type="number"
+            placeholder="Straßennummer"
+            [(ngModel)]="streetnumber"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input
+              type="number"
+              placeholder="Postleitzahl"
+              [(ngModel)]="postcode"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-input
+                type="text"
+                placeholder="Ort"
+                [(ngModel)]="town"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input
+                  type="number"
+                  placeholder="Telefon"
+                  [(ngModel)]="phone"
+                ></ion-input>
+              </ion-item>
   </ion-content>
 
   <ion-button (click)="onNewPlayerClick()">Neuer Spieler</ion-button>
