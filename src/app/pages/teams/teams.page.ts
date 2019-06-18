@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { Player } from 'src/app/model/player.model';
 import { Address } from 'src/app/model/address.model';
 
-enum ENUM_MODE { SELECTION, CREATE_TEAM, CREATE_PLAYER }
+enum ENUM_MODE { SELECTION, CREATE_TEAM }
 
 @Component({
   selector: "app-teams",
@@ -35,15 +35,6 @@ export class TeamsPage implements OnInit {
 
   // Player
   name: string;
-  isWoman: boolean;
-  birth: Date;
-
-  // Address
-  street: string;
-  streetnumber: string;
-  postcode: number;
-  town: string;
-  phone: number;
 
   //Team  
   altersklasse: TAltersklasse;
@@ -78,21 +69,10 @@ export class TeamsPage implements OnInit {
     this.name = undefined;
     this.altersklasse = undefined;
     this.liga = undefined;
-    this.phone = undefined;
-    this.town = undefined;
-    this.street = undefined;
-    this.streetnumber = undefined;
-    this.postcode = undefined;
-    this.birth = undefined;
-    this.isWoman = undefined;
   }
 
   onNewTeamClick() {
     this.mode = ENUM_MODE.CREATE_TEAM;
-  }
-
-  onNewPlayerClick() {
-    this.mode = ENUM_MODE.CREATE_PLAYER;
   }
 
   onButtonTeamClick(index: number) {
@@ -117,21 +97,6 @@ export class TeamsPage implements OnInit {
     }
   }
 
-  submitNewPlayer() {
-    if (this.validateNewPlayerInput() === true) {
-      this.createNewPlayer(this.name,this.birth,this.street,this.streetnumber,this.postcode,this.town,this.phone,this.isWoman)
-      this.resetPageToDefaultView();
-    } else {
-      this.alertService.errorEmptyInputs();
-    }
-  }
-
-  validateNewPlayerInput(): boolean {
-    return this.name !== undefined && this.birth !== undefined && this.street !== undefined
-      && this.streetnumber !== undefined && this.postcode !== undefined
-      && this.town !== undefined && this.phone !== undefined;
-  }
-
   validateNewTeamInput(): boolean {
     return this.name !== undefined && this.altersklasse !== undefined && this.liga !== undefined;
   }
@@ -139,19 +104,6 @@ export class TeamsPage implements OnInit {
   createNewTeam(name: string, alterklasse: TAltersklasse, liga: TLiga) {
     const team: Team = { alterklasse, liga, name, id: (Math.floor(Math.random() * 1000) + 5), players: [] };
     this.userService.user.teams.push(team);
-  }
-
-  createNewPlayer(name: string, birth: Date, street: string,
-    streetnumber: string, postcode: number, town: string,
-    phone: number, isWomen: boolean): void {
-
-    const player: Player = {
-      isWoman: isWomen, birth, memo: "",
-      id: this.dumm_id_counter, name, properties: [],
-      address: new Address(street, streetnumber, postcode, town, phone)
-    }
-    this.dumm_id_counter++;
-    debugger;
   }
 
   resetPageToDefaultView() {
