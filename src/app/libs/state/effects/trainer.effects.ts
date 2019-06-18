@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
-import { TrainerService } from '../../services/trainer.service';
+import { TrainerService } from '../../../services/trainer.service';
 import * as TrainerActions from './../actions/trainer.action';
 
 @Injectable()
