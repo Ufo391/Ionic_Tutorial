@@ -18,13 +18,15 @@ export class OverviewPage implements OnInit {
     private mockingService: MockingService,
     public userService: UserService
   ) {
-    this.players = userService.selectedTeam.players;
   }
 
   players: Player[];
   selectedPlayer: Player;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.players = this.userService.selectedTeam.players;
+    this.selectedPlayer = undefined;
+  }
 
   showAdress() {
     this.alertService.showInformation(

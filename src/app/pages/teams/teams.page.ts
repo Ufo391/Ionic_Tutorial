@@ -8,6 +8,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { TAltersklasse, TLiga, EnumsService } from 'src/app/services/enums/enums.service';
 import { MockingService } from 'src/app/services/mocking/mocking.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { Player } from 'src/app/model/player.model';
+import { Address } from 'src/app/model/address.model';
 
 enum ENUM_MODE { SELECTION, CREATE_TEAM, CREATE_PLAYER }
 
@@ -26,6 +28,8 @@ export class TeamsPage implements OnInit {
 
   ligaOptions = this.enumService.GetENUMValues(TLiga);
 
+  private dumm_id_counter: number = 5;
+
 
   // Inputfields
 
@@ -39,7 +43,7 @@ export class TeamsPage implements OnInit {
   streetnumber: string;
   postcode: number;
   town: string;
-  phone: string;
+  phone: number;
 
   //Team  
   altersklasse: TAltersklasse;
@@ -74,6 +78,13 @@ export class TeamsPage implements OnInit {
     this.name = undefined;
     this.altersklasse = undefined;
     this.liga = undefined;
+    this.phone = undefined;
+    this.town = undefined;
+    this.street = undefined;
+    this.streetnumber = undefined;
+    this.postcode = undefined;
+    this.birth = undefined;
+    this.isWoman = undefined;
   }
 
   onNewTeamClick() {
@@ -98,7 +109,7 @@ export class TeamsPage implements OnInit {
   }
 
   submitNewTeam() {
-    if (this.name !== undefined && this.altersklasse !== undefined && this.liga !== undefined) {
+    if (this.validateNewTeamInput() === true) {
       this.createNewTeam(this.name, this.altersklasse, this.liga);
       this.resetPageToDefaultView();
     } else {
@@ -106,9 +117,41 @@ export class TeamsPage implements OnInit {
     }
   }
 
+  submitNewPlayer() {
+    if (this.validateNewPlayerInput() === true) {
+      this.createNewPlayer(this.name,this.birth,this.street,this.streetnumber,this.postcode,this.town,this.phone,this.isWoman)
+      this.resetPageToDefaultView();
+    } else {
+      this.alertService.errorEmptyInputs();
+    }
+  }
+
+  validateNewPlayerInput(): boolean {
+    return this.name !== undefined && this.birth !== undefined && this.street !== undefined
+      && this.streetnumber !== undefined && this.postcode !== undefined
+      && this.town !== undefined && this.phone !== undefined;
+  }
+
+  validateNewTeamInput(): boolean {
+    return this.name !== undefined && this.altersklasse !== undefined && this.liga !== undefined;
+  }
+
   createNewTeam(name: string, alterklasse: TAltersklasse, liga: TLiga) {
-    let team: Team = { alterklasse, liga, name, id: (Math.floor(Math.random() * 1000) + 5), players: [] };
+    const team: Team = { alterklasse, liga, name, id: (Math.floor(Math.random() * 1000) + 5), players: [] };
     this.userService.user.teams.push(team);
+  }
+
+  createNewPlayer(name: string, birth: Date, street: string,
+    streetnumber: string, postcode: number, town: string,
+    phone: number, isWomen: boolean): void {
+
+    const player: Player = {
+      isWoman: isWomen, birth, memo: "",
+      id: this.dumm_id_counter, name, properties: [],
+      address: new Address(street, streetnumber, postcode, town, phone)
+    }
+    this.dumm_id_counter++;
+    debugger;
   }
 
   resetPageToDefaultView() {

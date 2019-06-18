@@ -3,9 +3,9 @@ export class Address {
     private streetnumber: string;
     private postcode: number;
     private town: string;
-    private phone: string;
+    private phone: number;
 
-    constructor(street: string, streetnumber: string, postcode: number, town: string, phone: string) {
+    constructor(street: string, streetnumber: string, postcode: number, town: string, phone: number) {
         this.street = street;
         this.streetnumber = streetnumber;
         this.postcode = postcode;
@@ -29,7 +29,7 @@ export class Address {
         return this.town;
     }
 
-    public getPhone(): string {
+    public getPhone(): number {
         return this.phone;
     }
 

@@ -57,7 +57,7 @@ export class MockingService {
               "233a",
               684654,
               "Rudiwald",
-              "0176-654654"
+              0o176654654
             ),
             isWoman: false,
             memo: "Quak!",
@@ -120,7 +120,7 @@ export class MockingService {
         "23a",
         123456,
         "Kaiserslautern",
-        "0176-126498"
+        0o176 - 126498
       ),
       isWoman: false,
       memo: "Hört nachts schlecht!",
@@ -154,7 +154,7 @@ export class MockingService {
         "93",
         13357,
         "Berlin",
-        "030-123654"
+        0o30123654
       ),
       isWoman: false,
       memo: "Hat immer Durst!",
