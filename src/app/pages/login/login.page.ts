@@ -27,6 +27,16 @@ export class LoginPage implements OnInit {
 
   ngOnInit() { }
 
+  /*
+integrieren von StateMachine -->
+1) nrgx service in konstruktor
+2) observerable mit typ aus app.state klasse z.B. User
+3) this.users = store.select('user');
+4) anwenden des gewollten API Calls
+5) this.store.dispatch(new ActionTest.GetAllTeams(unter.token));
+
+  */
+
   navigateToTeamsPage(user: firebase.User) {
     this.apiService.getAPI().login(user.email, user.uid).then(() => {
       this.router.navigate(["/teams"]);
