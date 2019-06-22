@@ -100,7 +100,7 @@
         </ion-item>
       </div>
       <ion-item>
-        <ion-button (click)="onNewPlayerClick()">Neuer Spieler</ion-button>        
+        <ion-button (click)="onNewPlayerClick()">Neuer Spieler</ion-button>
       </ion-item>
     </ion-list>
   </ion-content>
@@ -156,16 +156,8 @@
         placeholder="Telefon"
         [(ngModel)]="phone"
       ></ion-input>
-      <ion-item>
-        <ion-label>Mannschaft:</ion-label>
-        <ion-select [(ngModel)]="selectedTeamNewPlayer">
-          <ion-select-option
-            *ngFor="let team of UserTeams"
-            [value]="team"
-            >{{ team.name }}</ion-select-option
-          >
-        </ion-select>
-      </ion-item>
+    </ion-item>
+    <ion-item>
       <ion-grid>
         <ion-row>
           <ion-col>
