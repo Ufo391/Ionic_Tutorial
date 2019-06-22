@@ -104,12 +104,12 @@
       <ion-icon name="contacts"></ion-icon>
       <ion-label>Mannschaft</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="ueberblick" (click)="onTabButtonClick('/overview')">
+    <ion-tab-button *ngIf="this.userService.selectedTeam" tab="ueberblick" (click)="onTabButtonClick('/overview')">
       <ion-icon name="eye"></ion-icon>
       <ion-label>Überblick</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="trainingsplaner" (click)="onTabButtonClick('/planer')">
+    <ion-tab-button *ngIf="this.userService.selectedTeam" tab="trainingsplaner" (click)="onTabButtonClick('/planer')">
       <ion-icon name="clipboard"></ion-icon>
       <ion-label>Trainingsplaner</ion-label>
     </ion-tab-button>
