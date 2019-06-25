@@ -95,6 +95,7 @@ export class OverviewPage implements OnInit {
       address: new Address(street, streetnumber, postcode, town, phone)
     }
     this.dumm_id_counter++;
+    this.userService.selectedTeam.players.push(player);
     debugger;
   }
 
@@ -117,6 +118,7 @@ export class OverviewPage implements OnInit {
   }
 
   validateNewPlayerInput(): boolean {
+    if (this.isWoman === undefined) { this.isWoman = false; }
     return this.name !== undefined && this.birth !== undefined && this.street !== undefined
       && this.streetnumber !== undefined && this.postcode !== undefined
       && this.town !== undefined && this.phone !== undefined;
