@@ -5,6 +5,7 @@ import { AuthService } from "../../services/auth/athentification.service";
 import { ApiService } from 'src/app/services/api/api.service';
 import { Login } from 'src/app/responses/response.interfaces';
 import { User } from '../../model/user.model';
+import { auth } from 'firebase';
 
 @Component({
   selector: "app-login",
@@ -23,38 +24,34 @@ export class LoginPage implements OnInit {
     private apiService: ApiService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { this.setCurrentUser(); }
 
   ionViewDidEnter() {
     // Event
-    this.setCurrentUser();
   }
 
-  navigateToTeamsPage(user: firebase.User) {
-    this.apiService.getAPI().login(user.email, user.uid).then(() => {
-      this.router.navigate(["/teams"]);
-      this.clearInputs();
-    }).catch(error => {
-      this.alertService.errorAuthProcess(error);
-    });
+  navigateToTeamsPage() {
+    this.router.navigate(["/teams"]);
+    this.clearInputs();
   }
 
   setCurrentUser() {
     const that = this;
 
-    this.authService.getLoggedInUser().subscribe(user => {
+    this.authService.getLoggedInUser().subscribe((user: firebase.User) => {
       if (user !== null) {
-        this.navigateToTeamsPage(user);
+        this.authService.ReconnectSession(user);
+        this.navigateToTeamsPage();
       }
     });
   }
 
   loginEmail() {
-    this.authService.loginEmail(
-      this.email,
-      this.password,
-      this.navigateToTeamsPage.bind(this)
-    );
+    this.authService.loginEmail(this.email, this.password).then((user: User) => {
+      this.navigateToTeamsPage();
+    }).catch(error => {
+      this.alertService.errorAuthProcess(error);
+    });
   }
 
   loginGoogle() {

@@ -7,7 +7,7 @@ import { Team } from '../model/team.model';
 export interface Login {
     error: string;
     token: string;
-    trainerID: number;
+    trainer: Trainer;
 }
 
 export interface Logout {

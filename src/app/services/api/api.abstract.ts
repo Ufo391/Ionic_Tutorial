@@ -7,7 +7,7 @@ import { Player } from 'src/app/model/player.model';
 
 export abstract class AbstractServerAPI {
 
-    constructor(private authService: AuthService, private userService: UserService) { }
+    constructor(public authService: AuthService, public userService: UserService) { }
 
     /*
     async login(name: string, email: string, firebirdID: string): Promise<void> {

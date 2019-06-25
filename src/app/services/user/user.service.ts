@@ -9,6 +9,5 @@ export class UserService {
 
   constructor() { }
 
-  user: User;
   selectedTeam: Team;
 }

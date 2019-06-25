@@ -4,18 +4,20 @@ import { auth } from "firebase";
 import { AlertService } from "../alert/alert.service";
 import { User } from 'src/app/model/user.model';
 import { UserService } from '../user/user.service';
+import { ApiService } from '../api/api.service';
+import { Login } from 'src/app/responses/response.interfaces';
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  private firebaseUser: firebase.User;
-  private authToken: string;
+  private user: User;
 
   constructor(
     private afAuth: AngularFireAuth,
     private alertService: AlertService,
-    private userService: UserService
+    private userService: UserService,
+    private apiService: ApiService
   ) { }
 
   loginGoogle(navigateCallback) {
@@ -30,27 +32,11 @@ export class AuthService {
       });
   }
 
-  getFirebaseUser(): firebase.User {
-    return this.firebaseUser;
-  }
-
-  getAuthToken(): string {
-    return this.authToken;
-  }
-
-  setAuthToken(token: string, user: User): void {
-    if (this.authToken !== undefined) {
-      throw new Error('Ungültige Modifizierung!');
-    } else {
-      this.authToken = token;
-      this.userService.user = user;
-    }
-  }
-
   logout() {
-    // Todo --> Authtoken & User & Trainer auf null setzen!
     const that = this;
-    this.afAuth.auth.signOut().catch(error => {
+    this.afAuth.auth.signOut().then(() => {
+      this.user = undefined;
+    }).catch(error => {
       that.alertService.errorAuthProcess(error.message);
     });
   }
@@ -59,17 +45,46 @@ export class AuthService {
     return this.afAuth.authState;
   }
 
-  loginEmail(email: string, password: string, navigateCallback) {
-    const that = this;
+  loginEmail(email: string, password: string): Promise<User> {
+    return new Promise((resolve, reject) => {
+      this.afAuth.auth.signInWithEmailAndPassword(email, password)
+        .then(async (result: auth.UserCredential) => {
+          resolve(await this.getAndSetUserFromAPICred(result));
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
 
-    this.afAuth.auth
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        navigateCallback();
-      })
-      .catch(error => {
-        that.alertService.errorAuthProcess(error.message);
-      });
+  private getAndSetUserFromAPICred(credential: auth.UserCredential): Promise<User> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const login: Login = await this.apiService.login(credential.user.displayName, credential.user.email, credential.user.uid);
+        this.user = { token: login.token, trainer: login.trainer };
+        resolve(this.user);
+      } catch (error) {
+        reject(error);
+      }
+
+    });
+  }
+
+  private getAndSetUserFromAPIUser(fUser: firebase.User): Promise<User> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const login: Login = await this.apiService.login(fUser.displayName, fUser.email, fUser.uid);
+        this.user = { token: login.token, trainer: login.trainer };
+        resolve(this.user);
+      } catch (error) {
+        reject(error);
+      }
+
+    });
+  }
+
+  ReconnectSession(fUser: firebase.User) {
+this.getAndSetUserFromAPIUser(fUser); hier weiter machen für login page die llogik wahrscheinlich als promise zurüc geben 
   }
 
   resetPassword(email: string) {
