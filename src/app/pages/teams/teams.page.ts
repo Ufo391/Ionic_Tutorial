@@ -49,11 +49,16 @@ export class TeamsPage implements OnInit {
     private mockingService: MockingService,
     public userService: UserService
   ) {
-    this.mode = ENUM_MODE.SELECTION;
-    this.setCurrentUser();
+
   }
 
   ngOnInit() { }
+
+  ionViewDidEnter() {
+    // Event
+    this.mode = ENUM_MODE.SELECTION;
+    this.setCurrentUser();
+  }
 
   setCurrentUser() {
     this.authService.getLoggedInUser().subscribe(user => {

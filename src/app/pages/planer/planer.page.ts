@@ -13,6 +13,11 @@ export class PlanerPage implements OnInit {
   ngOnInit() {
   }
 
+  ionViewDidEnter() {
+    // Event
+
+  }
+
   showTrainingProperties() {
     this.alertService.showInformation("Eigenschaften", "Torschuss \n Kraftübung");
   }

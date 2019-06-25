@@ -32,7 +32,7 @@
         </ion-item>
       </ion-list>
 
-      <div *ngIf="selectedPlayer">
+      <div *ngIf="selectedPlayer && this.mode === this.enumVisibilityMode.CREATE_PLAYER">
         <ion-item>
           <ion-button (click)="showAdress()">Anschrift</ion-button>
         </ion-item>

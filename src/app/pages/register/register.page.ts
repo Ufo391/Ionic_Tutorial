@@ -20,15 +20,20 @@ export class RegisterPage implements OnInit {
     private alertService: AlertService,
     private authService: AuthService
   ) {
-    this.setCurrentUser();
+
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   register() {
     if (this.checkInputs() === true) {
       this.transferData("/teams");
     }
+  }
+
+  ionViewDidEnter() {
+    // Event
+    this.setCurrentUser();
   }
 
   private transferData(page: string) {

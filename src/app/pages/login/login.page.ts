@@ -21,11 +21,14 @@ export class LoginPage implements OnInit {
     private alertService: AlertService,
     private authService: AuthService,
     private apiService: ApiService
-  ) {
-    this.setCurrentUser();
-  }
+  ) { }
 
   ngOnInit() { }
+
+  ionViewDidEnter() {
+    // Event
+    this.setCurrentUser();
+  }
 
   navigateToTeamsPage(user: firebase.User) {
     this.apiService.getAPI().login(user.email, user.uid).then(() => {

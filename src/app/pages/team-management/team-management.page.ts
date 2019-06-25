@@ -13,4 +13,7 @@ export class TeamManagementPage implements OnInit {
   ngOnInit() {
   }
 
+  ionViewDidEnter() {
+    // Event    
+  }
 }

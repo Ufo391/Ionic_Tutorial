@@ -55,13 +55,15 @@ export class OverviewPage implements OnInit {
     private mockingService: MockingService,
     public userService: UserService,
     private enumService: EnumsService
-  ) {
-  }
+  ) { }
 
   players: Player[];
   selectedPlayer: Player;
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  ionViewDidEnter() {
+    // Event
     this.mode = ENUM_MODE.EVALUATE_PLAYER;
     this.players = this.userService.selectedTeam.players;
     this.selectedPlayer = undefined;
