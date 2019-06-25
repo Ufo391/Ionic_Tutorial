@@ -90,7 +90,7 @@ export class OverviewPage implements OnInit {
     phone: number, isWomen: boolean): void {
 
     const player: Player = {
-      isWoman: isWomen, birth, memo: "",
+      istFrau: isWomen, birth, memo: "",
       id: this.dumm_id_counter, name, properties: [],
       address: new Address(street, streetnumber, postcode, town, phone)
     }

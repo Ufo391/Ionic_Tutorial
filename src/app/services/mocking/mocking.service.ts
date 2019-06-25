@@ -59,7 +59,7 @@ export class MockingService {
               "Rudiwald",
               0o176654654
             ),
-            isWoman: false,
+            istFrau: false,
             memo: "Quak!",
             properties: [
               {
@@ -122,7 +122,7 @@ export class MockingService {
         "Kaiserslautern",
         0o176 - 126498
       ),
-      isWoman: false,
+      istFrau: false,
       memo: "Hört nachts schlecht!",
       properties: [
         {
@@ -156,7 +156,7 @@ export class MockingService {
         "Berlin",
         0o30123654
       ),
-      isWoman: false,
+      istFrau: false,
       memo: "Hat immer Durst!",
       properties: [
         {

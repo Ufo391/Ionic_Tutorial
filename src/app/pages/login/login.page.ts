@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { AlertService } from "../../services/alert/alert.service";
 import { AuthService } from "../../services/auth/athentification.service";
 import { ApiService } from 'src/app/services/api/api.service';
-import { LoginResponse } from 'src/app/responses/response.interfaces';
+import { Login } from 'src/app/responses/response.interfaces';
 import { User } from '../../model/user.model';
 
 @Component({
