@@ -96,7 +96,6 @@ export class OverviewPage implements OnInit {
     }
     this.dumm_id_counter++;
     this.userService.selectedTeam.players.push(player);
-    debugger;
   }
 
   resetPageToDefaultView() {

@@ -18,4 +18,12 @@ export abstract class AbstractServerAPI {
 
     abstract getUser(email: string, firebirdID: string): Promise<User>;
     abstract getToken(user: User): string;
+
+    abstract CreatePlayer(): void;
+    abstract UpdatePlayer(): void;
+    abstract DeletePlayer(): void;
+    abstract GetPlayer(): void;
+
+    // CreatePlayer | CreatePlayerDone | UpdatePlayer | UpdatePlayerDone | DeletePlayer
+    // | DeletePlayerDone | GetPlayer | GetPlayerDone;
 }
