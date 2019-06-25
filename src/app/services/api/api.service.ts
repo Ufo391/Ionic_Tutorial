@@ -1,26 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { LoginResponse } from 'src/app/responses/response.interfaces';
 import { AbstractServerAPI } from './api.abstract';
-import { APIMock } from '../mocking/api.mock';
-import { MockingService } from '../mocking/mocking.service';
-import { AuthService } from '../auth/athentification.service';
-import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class ApiService extends AbstractServerAPI {
 
-  private serverAPI: AbstractServerAPI;
-
-  constructor(private http: HttpClient, private mockingService: MockingService, private authService: AuthService, private userService: UserService) {
-    this.serverAPI = new APIMock(this.mockingService, this.authService, this.userService);
-  }
-
-  public getAPI(): AbstractServerAPI {
-    return this.serverAPI;
-  }
+  constructor() { }
 
   // erstmal von aussen nicht zugreifbar lassen 
   /*

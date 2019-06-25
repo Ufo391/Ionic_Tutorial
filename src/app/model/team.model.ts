@@ -1,9 +1,9 @@
 import { Player } from './player.model';
 
 export interface Team {
-    id: number;
+    id?: number;
     name: string;
-    alterklasse: number;
+    altersklasse: number;
     liga: number;
-    players: Player[];
+    spieler?: Player[];
 }

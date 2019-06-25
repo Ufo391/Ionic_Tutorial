@@ -1,39 +1,39 @@
 export class Address {
-    private street: string;
-    private streetnumber: string;
-    private postcode: number;
-    private town: string;
-    private phone: number;
+    private strassenname: string;
+    private hausnummer: string;
+    private postleitzahl: number;
+    private ort: string;
+    private telefonnummer: string;
 
-    constructor(street: string, streetnumber: string, postcode: number, town: string, phone: number) {
-        this.street = street;
-        this.streetnumber = streetnumber;
-        this.postcode = postcode;
-        this.town = town;
-        this.phone = phone;
+    constructor(street: string, streetnumber: string, postcode: number, town: string, phone: string) {
+        this.strassenname = street;
+        this.hausnummer = streetnumber;
+        this.postleitzahl = postcode;
+        this.ort = town;
+        this.telefonnummer = phone;
     }
 
     public getStreet(): string {
-        return this.street;
+        return this.strassenname;
     }
 
     public getStreetnumber(): string {
-        return this.streetnumber;
+        return this.hausnummer;
     }
 
     public getPostcode(): number {
-        return this.postcode;
+        return this.postleitzahl;
     }
 
     public getTown(): string {
-        return this.town;
+        return this.ort;
     }
 
     public getPhone(): number {
-        return this.phone;
+        return this.telefonnummer;
     }
 
     public addressToString(): string {
-        return this.street + " " + this.streetnumber + " " + this.postcode + " " + this.town;
+        return this.strassenname + " " + this.hausnummer + " " + this.postleitzahl + " " + this.ort;
     }
 }

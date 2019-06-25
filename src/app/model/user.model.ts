@@ -1,13 +1,6 @@
-import { Lizenz } from '../services/enums/enums.service';
-import { Team } from './team.model';
-import { Training } from './training.model';
+import { Trainer } from './trainer.model';
 
 export interface User {
-    id: number;
-    mail: string;
-    name: string;
-    birth: Date;
-    lizenz: Lizenz;
-    teams: Team[];
-    exercises: Training[];
+    token: string;
+    trainer: Trainer;
 }
