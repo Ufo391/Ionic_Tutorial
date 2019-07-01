@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { AbstractServerAPI } from './api.abstract';
-import { UserService } from '../user/user.service';
-import { User } from 'src/app/model/user.model';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { AbstractServerAPI } from "./api.abstract";
+import { UserService } from "../user/user.service";
+import { User } from "src/app/model/user.model";
 import {
   Login,
   Logout,
@@ -11,14 +11,13 @@ import {
   CreatePlayer,
   GetPlayer,
   UpdatePlayer
-} from 'src/app/responses/response.interfaces';
+} from "src/app/responses/response.interfaces";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ApiService extends AbstractServerAPI {
-
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService, private http: HttpClient) {
     super(userService);
   }
 
@@ -28,9 +27,17 @@ export class ApiService extends AbstractServerAPI {
   getToken(user: import("../../model/user.model").User): string {
     throw new Error("Method not implemented.");
   }
+
   login(name: string, email: string, firebaseID: string): Promise<Login> {
-    throw new Error("Method not implemented.");
+    const body: Body = {
+      name,
+      email,
+      firebaseID
+    };
+    const uri = this.getRootUri() + "Login";
+    return this.http.post<Login>(uri, body).toPromise();
   }
+
   logout(token: string): Promise<Logout> {
     throw new Error("Method not implemented.");
   }
@@ -43,10 +50,16 @@ export class ApiService extends AbstractServerAPI {
   GetTeam(token: string, id: number): Promise<GetTeamANDCreateTeam> {
     throw new Error("Method not implemented.");
   }
-  CreateTeam(token: string, team: import("../../model/team.model").Team): Promise<GetTeamANDCreateTeam> {
+  CreateTeam(
+    token: string,
+    team: import("../../model/team.model").Team
+  ): Promise<GetTeamANDCreateTeam> {
     throw new Error("Method not implemented.");
   }
-  CreatePlayer(token: string, player: import("../../model/player.model").Player): Promise<CreatePlayer> {
+  CreatePlayer(
+    token: string,
+    player: import("../../model/player.model").Player
+  ): Promise<CreatePlayer> {
     throw new Error("Method not implemented.");
   }
   GetPlayer(token: string, id: number): Promise<GetPlayer> {
@@ -56,7 +69,7 @@ export class ApiService extends AbstractServerAPI {
     throw new Error("Method not implemented.");
   }
 
-  // erstmal von aussen nicht zugreifbar lassen 
+  // erstmal von aussen nicht zugreifbar lassen
   /*
   private login(email: string, firebirdID: string): Promise<User> {
 
@@ -79,7 +92,12 @@ export class ApiService extends AbstractServerAPI {
   */
 
   private getRootUri(): string {
-    return 'https://virtserver.swaggerhub.com/AHeinisch/trainingsplaner/1.0.1/api/';
+    return "http://ec2-52-59-195-168.eu-central-1.compute.amazonaws.com/api/";
   }
+}
 
+class Body {
+  name: string;
+  email: string;
+  firebaseID: string;
 }

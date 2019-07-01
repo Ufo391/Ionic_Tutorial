@@ -68,6 +68,7 @@ export class AuthService {
   ): Promise<User> {
     return new Promise(async (resolve, reject) => {
       try {
+        debugger;
         const login: Login = await this.apiService.login(
           credential.user.displayName,
           credential.user.email,
@@ -81,7 +82,7 @@ export class AuthService {
     });
   }
 
-  private getAndSetUserFromAPIUser(fUser: firebase.User): Promise<User> {
+  public getAndSetUserFromAPIUser(fUser: firebase.User): Promise<User> {
     return new Promise(async (resolve, reject) => {
       try {
         const login: Login = await this.apiService.login(
@@ -89,16 +90,13 @@ export class AuthService {
           fUser.email,
           fUser.uid
         );
+        debugger;
         this.user = { token: login.token, trainer: login.trainer };
         resolve(this.user);
       } catch (error) {
         reject(error);
       }
     });
-  }
-
-  ReconnectSession(fUser: firebase.User) {
-    this.getAndSetUserFromAPIUser(fUser);
   }
 
   resetPassword(email: string) {
