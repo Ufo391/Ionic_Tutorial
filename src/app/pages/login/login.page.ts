@@ -21,6 +21,7 @@ export class LoginPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    debugger;
     this.setCurrentUser();
   }
 
@@ -38,7 +39,6 @@ export class LoginPage implements OnInit {
 
     this.authService.getLoggedInUser().subscribe((user: firebase.User) => {
       if (user !== null) {
-        debugger;
         this.authService.ReconnectSession(user);
         this.navigateToTeamsPage();
       }

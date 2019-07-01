@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AbstractServerAPI } from './api.abstract';
-import { AuthService } from '../auth/athentification.service';
 import { UserService } from '../user/user.service';
 import { User } from 'src/app/model/user.model';
 import {
@@ -19,8 +18,8 @@ import {
 })
 export class ApiService extends AbstractServerAPI {
 
-  constructor(public authService: AuthService, public userService: UserService) {
-    super(authService, userService);
+  constructor(public userService: UserService) {
+    super(userService);
   }
 
   getUser(email: string, firebirdID: string): Promise<User> {

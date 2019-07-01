@@ -3,7 +3,6 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { auth } from "firebase";
 import { AlertService } from "../alert/alert.service";
 import { User } from "src/app/model/user.model";
-import { UserService } from "../user/user.service";
 import { ApiService } from "../api/api.service";
 import { Login } from "src/app/responses/response.interfaces";
 
@@ -16,7 +15,6 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private alertService: AlertService,
-    private userService: UserService,
     private apiService: ApiService
   ) {}
 
