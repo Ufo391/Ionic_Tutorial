@@ -10,7 +10,11 @@ import {
 import { UserService } from "src/app/services/user/user.service";
 import { Trainer } from "src/app/model/trainer.model";
 import { ApiService } from "src/app/services/api/api.service";
-import { GetTeamANDCreateTeamResponse } from "src/app/responses/response.interfaces";
+import {
+  GetTeamANDCreateTeamResponse,
+  GetTrainerResponse
+} from "src/app/responses/response.interfaces";
+import { Team } from "src/app/model/team.model";
 
 enum ENUM_MODE {
   SELECTION,
@@ -38,6 +42,8 @@ export class TeamsPage implements OnInit {
   altersklasse: TAltersklasse;
   liga: TLiga;
 
+  teams: Team[] = [];
+
   constructor(
     public authService: AuthService,
     private alertService: AlertService,
@@ -45,28 +51,30 @@ export class TeamsPage implements OnInit {
     private enumService: EnumsService,
     public userService: UserService,
     private apiService: ApiService
-  ) {
-    this.createEmptyTeamsArray();
-  }
+  ) {}
 
-  ngOnInit() {
-    this.createEmptyTeamsArray();
-  }
+  ngOnInit() {}
 
   ionViewDidEnter() {
     // Event
     this.mode = ENUM_MODE.SELECTION;
-    this.createEmptyTeamsArray();
+    this.loadTeams();
   }
 
-  private createEmptyTeamsArray() {
+  private loadTeams(): void {
     if (this.authService.getUser() === undefined) {
       throw new Error("Es muss in diesem Bereich ein User existieren!");
     }
-    const trainer: Trainer = this.authService.getUser().trainer;
-    if (trainer.teams === undefined) {
-      trainer.teams = [];
-    }
+
+    const that = this;
+    this.apiService
+      .GetTrainer(
+        this.authService.getToken(),
+        this.authService.getUser().trainer.id
+      )
+      .then((res: GetTrainerResponse) => {
+        that.teams = res.teams;
+      });
   }
 
   private resetInputs(): void {
@@ -80,9 +88,8 @@ export class TeamsPage implements OnInit {
   }
 
   onButtonTeamClick(index: number) {
-    this.userService.selectedTeam = this.authService.getUser().trainer.teams[
-      index
-    ];
+    this.userService.selectedIndex = index;
+    this.userService.selectedTeam = this.teams[index];
     this.router.navigate(["/overview"]);
   }
 
@@ -99,8 +106,6 @@ export class TeamsPage implements OnInit {
 
   submitNewTeam() {
     if (this.validateNewTeamInput() === true) {
-      //this.createNewTeam(this.name, this.altersklasse, this.liga);
-
       this.apiService
         .CreateTeam(
           this.authService.getToken(),
@@ -109,7 +114,7 @@ export class TeamsPage implements OnInit {
           this.liga
         )
         .then((res: GetTeamANDCreateTeamResponse) => {
-          debugger;
+          this.loadTeams();
           this.resetPageToDefaultView();
         });
     } else {
@@ -125,15 +130,6 @@ export class TeamsPage implements OnInit {
     );
   }
 
-  createNewTeam(name: string, altersklasse: TAltersklasse, liga: TLiga) {
-    this.apiService.CreateTeam(
-      this.authService.getUser().token,
-      name,
-      altersklasse,
-      liga
-    );
-  }
-
   resetPageToDefaultView() {
     this.mode = ENUM_MODE.SELECTION;
     this.resetInputs();
@@ -141,5 +137,6 @@ export class TeamsPage implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.teams = [];
   }
 }

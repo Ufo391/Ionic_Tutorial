@@ -3,7 +3,6 @@ import { Router } from "@angular/router";
 import { AlertService } from "../../services/alert/alert.service";
 import { Player } from "../../model/player.model";
 import { Address } from "src/app/model/address.model";
-import { MockingService } from "../../services/mocking/mocking.service";
 import { UserService } from "src/app/services/user/user.service";
 import {
   EnumsService,
@@ -12,6 +11,13 @@ import {
 } from "src/app/services/enums/enums.service";
 import { Team } from "src/app/model/team.model";
 import { AuthService } from "src/app/services/auth/athentification.service";
+import { ApiService } from "src/app/services/api/api.service";
+import {
+  CreatePlayerResponse,
+  InsertPlayerToTeamResponse,
+  GetTrainerResponse
+} from "src/app/responses/response.interfaces";
+import { DatePipe } from "@angular/common";
 
 enum ENUM_MODE {
   EVALUATE_PLAYER,
@@ -31,8 +37,6 @@ export class OverviewPage implements OnInit {
   altersklassenOptions = this.enumService.GetENUMValues(TAltersklasse);
 
   ligaOptions = this.enumService.GetENUMValues(TLiga);
-
-  private dumm_id_counter: number = 5;
 
   UserTeams: Team[];
 
@@ -60,7 +64,9 @@ export class OverviewPage implements OnInit {
     private alertService: AlertService,
     private authService: AuthService,
     public userService: UserService,
-    private enumService: EnumsService
+    private enumService: EnumsService,
+    private apiService: ApiService,
+    private datePipe: DatePipe
   ) {}
 
   players: Player[];
@@ -71,7 +77,7 @@ export class OverviewPage implements OnInit {
   ionViewDidEnter() {
     // Event
     this.mode = ENUM_MODE.EVALUATE_PLAYER;
-    this.players = this.userService.selectedTeam.spieler;
+    this.RefreshPlayersOfSelectedTeam();
     this.selectedPlayer = undefined;
   }
 
@@ -94,38 +100,53 @@ export class OverviewPage implements OnInit {
 
   submitNewPlayer() {
     if (this.validateNewPlayerInput() === true) {
-      this.createNewPlayer(
-        this.name,
-        this.birth,
-        this.street,
-        this.streetnumber,
-        this.postcode,
-        this.town,
-        this.phone,
-        this.isWoman
-      );
-      this.resetPageToDefaultView();
+      const token: string = this.authService.getToken();
+      this.apiService
+        .CreatePlayer(token, {
+          birth: this.datePipe.transform(this.birth),
+          merkmale: [],
+          name: this.name,
+          notiz: "",
+          nummer: this.phone,
+          teams: [],
+          istFrau: this.isWoman,
+          kontakt: {
+            hausnummer: this.streetnumber,
+            ort: this.town,
+            postleitzahl: this.postcode,
+            strassenname: this.street,
+            telefonnummer: "" + this.phone
+          }
+        })
+        .then((res: CreatePlayerResponse) => {
+          this.apiService
+            .InsertPlayerToTeam(token, this.userService.selectedTeam.id, res.id)
+            .then((res: InsertPlayerToTeamResponse) => {
+              this.resetPageToDefaultView();
+            });
+        });
     } else {
       this.alertService.errorEmptyInputs();
     }
   }
 
-  createNewPlayer(
-    name: string,
-    birth: Date,
-    street: string,
-    streetnumber: string,
-    postcode: number,
-    town: string,
-    phone: number,
-    isWomen: boolean
-  ): void {
-    throw new Error("nicht implementiert!");
-  }
-
   resetPageToDefaultView() {
     this.mode = ENUM_MODE.EVALUATE_PLAYER;
+    this.RefreshPlayersOfSelectedTeam();
     this.resetInputs();
+  }
+
+  private RefreshPlayersOfSelectedTeam() {
+    const that = this;
+    this.apiService
+      .GetTrainer(
+        this.authService.getToken(),
+        this.authService.getUser().trainer.id
+      )
+      .then((res: GetTrainerResponse) => {        
+        debugger;
+        that.players = res.teams[that.userService.selectedIndex].spieler;
+      });
   }
 
   private resetInputs(): void {
@@ -158,5 +179,9 @@ export class OverviewPage implements OnInit {
 
   onNewPlayerClick() {
     this.mode = ENUM_MODE.CREATE_PLAYER;
+  }
+
+  transformDate(date: Date): string {
+    return this.datePipe.transform(date, "yyyy-MM-dd");
   }
 }

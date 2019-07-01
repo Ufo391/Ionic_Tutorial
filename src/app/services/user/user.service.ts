@@ -10,4 +10,5 @@ export class UserService {
   constructor() { }
 
   selectedTeam: Team;
+  selectedIndex: number;
 }

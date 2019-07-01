@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AlertService } from "../../services/alert/alert.service";
 import { AuthService } from "../../services/auth/athentification.service";
 import { Router } from "@angular/router";
+import { User } from "src/app/model/user.model";
 
 @Component({
   selector: "app-register",
@@ -19,11 +20,9 @@ export class RegisterPage implements OnInit {
     private router: Router,
     private alertService: AlertService,
     private authService: AuthService
-  ) {
+  ) {}
 
-  }
-
-  ngOnInit() { }
+  ngOnInit() {}
 
   register() {
     if (this.checkInputs() === true) {
@@ -94,7 +93,9 @@ export class RegisterPage implements OnInit {
 
     this.authService.getLoggedInUser().subscribe(user => {
       if (user !== null) {
-        this.navigateToPage("/teams");
+        this.authService.getAndSetUserFromAPIUser(user).then((user: User) => {
+          this.navigateToPage("/teams");
+        });
       }
     });
   }

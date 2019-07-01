@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
     const that = this;
 
     this.authService.getLoggedInUser().subscribe((user: firebase.User) => {
-      if (user !== null) {
+      if (user !== null) {        
         this.authService.getAndSetUserFromAPIUser(user).then((user: User) => {
           this.navigateToTeamsPage();
         });
