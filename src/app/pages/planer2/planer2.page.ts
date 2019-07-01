@@ -60,7 +60,7 @@ export class Planer2Page implements OnInit {
     this.canvas.height = 1060;
     this.exercises = new Array<ExerciseModel>();
     this.currentExercise = new ExerciseModel(0, 0, false, '', new Array<ElementModel>(), 2, 0, []);
-    this.user = this.authService.getUser();
+    this.user = this.authService.getUser();    
     this.exerciseServise.getExercises(this.user.token).subscribe(data => {
       this.exercises = data;
     });

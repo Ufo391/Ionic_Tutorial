@@ -5,23 +5,32 @@
 </ion-header>
 
 <ion-content>
-<img #cone src="assets/cone.svg" alt="" style="display: none">
-<img #ball src="assets/neutral.svg" alt="" style="display: none">
-<img #flag src="assets/flag.svg" alt="" style="display: none">
-<img #arrow1 src="assets/arrow_head.png" alt="" style="display: none">
-<img #arrow2 src="assets/arrow_head.png" alt="" style="display: none">
-<img #arrow3 src="assets/arrow_head.png" alt="" style="display: none">
-<img #bench src="assets/bench.svg" alt="" style="display: none">
-<img #goal src="assets/goal.svg" alt="" style="display: none">
-<img #pole src="assets/pole.svg" alt="" style="display: none">
-<img #ring src="assets/ring.svg" alt="" style="display: none">
-<img #playerB src="assets/player_blue.svg" alt="" style="display: none">
-<img #playerR src="assets/player_red.svg" alt="" style="display: none">
-<img #half src="assets/half.png" alt="" style="display: none">
-<img #full src="assets/full.png" alt="" style="display: none">
-<img #green src="assets/green.png" alt="" style="display: none">
+  <ion-list>
+    <ion-item>
+      <ion-button [routerLink]="['/overview']">
+        Zurück
+      </ion-button>
+    </ion-item>
+    <ion-item>
+<img #cone src="./assets/cone.svg" alt="" style="display: none">
+<img #ball src="./assets/neutral.svg" alt="" style="display: none">
+<img #flag src="./assets/flag.svg" alt="" style="display: none">
+<img #arrow1 src="./assets/arrow_head.png" alt="" style="display: none">
+<img #arrow2 src="./assets/arrow_head.png" alt="" style="display: none">
+<img #arrow3 src="./assets/arrow_head.png" alt="" style="display: none">
+<img #bench src="./assets/bench.svg" alt="" style="display: none">
+<img #goal src="./assets/goal.svg" alt="" style="display: none">
+<img #pole src="./assets/pole.svg" alt="" style="display: none">
+<img #ring src="./assets/ring.svg" alt="" style="display: none">
+<img #playerB src="./assets/player_blue.svg" alt="" style="display: none">
+<img #playerR src="./assets/player_red.svg" alt="" style="display: none">
+<img #half src="./assets/half.png" alt="" style="display: none">
+<img #full src="./assets/full.png" alt="" style="display: none">
+<img #green src="./assets/green.png" alt="" style="display: none">
+</ion-item>
+
 <div class="row">
-  <div class="col-4">
+  <div class="col-4" scrollx=true scrolly=true>
     <nav>
       <div class="nav nav-tabs nav-tabs-custom" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-drawing-tab" data-toggle="tab" href="#nav-drawing" role="tab"
@@ -215,7 +224,6 @@
   </div>
 
 </div>
-
-
+</ion-list>
 
 </ion-content>
