@@ -2,10 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AlertService } from "../../services/alert/alert.service";
 import { AuthService } from "../../services/auth/athentification.service";
-import { ApiService } from 'src/app/services/api/api.service';
-import { Login } from 'src/app/responses/response.interfaces';
-import { User } from '../../model/user.model';
-import { auth } from 'firebase';
+import { User } from "../../model/user.model";
 
 @Component({
   selector: "app-login",
@@ -20,11 +17,12 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private alertService: AlertService,
-    private authService: AuthService,
-    private apiService: ApiService
-  ) { }
+    private authService: AuthService
+  ) {}
 
-  ngOnInit() { this.setCurrentUser(); }
+  ngOnInit() {
+    this.setCurrentUser();
+  }
 
   ionViewDidEnter() {
     // Event
@@ -40,6 +38,7 @@ export class LoginPage implements OnInit {
 
     this.authService.getLoggedInUser().subscribe((user: firebase.User) => {
       if (user !== null) {
+        debugger;
         this.authService.ReconnectSession(user);
         this.navigateToTeamsPage();
       }
@@ -47,11 +46,14 @@ export class LoginPage implements OnInit {
   }
 
   loginEmail() {
-    this.authService.loginEmail(this.email, this.password).then((user: User) => {
-      this.navigateToTeamsPage();
-    }).catch(error => {
-      this.alertService.errorAuthProcess(error);
-    });
+    this.authService
+      .loginEmail(this.email, this.password)
+      .then((user: User) => {
+        this.navigateToTeamsPage();
+      })
+      .catch(error => {
+        this.alertService.errorAuthProcess(error);
+      });
   }
 
   loginGoogle() {

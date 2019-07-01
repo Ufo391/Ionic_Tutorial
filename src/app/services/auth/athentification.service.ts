@@ -2,10 +2,10 @@ import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { auth } from "firebase";
 import { AlertService } from "../alert/alert.service";
-import { User } from 'src/app/model/user.model';
-import { UserService } from '../user/user.service';
-import { ApiService } from '../api/api.service';
-import { Login } from 'src/app/responses/response.interfaces';
+import { User } from "src/app/model/user.model";
+import { UserService } from "../user/user.service";
+import { ApiService } from "../api/api.service";
+import { Login } from "src/app/responses/response.interfaces";
 
 @Injectable({
   providedIn: "root"
@@ -18,7 +18,7 @@ export class AuthService {
     private alertService: AlertService,
     private userService: UserService,
     private apiService: ApiService
-  ) { }
+  ) {}
 
   loginGoogle(navigateCallback) {
     let that = this;
@@ -34,11 +34,14 @@ export class AuthService {
 
   logout() {
     const that = this;
-    this.afAuth.auth.signOut().then(() => {
-      this.user = undefined;
-    }).catch(error => {
-      that.alertService.errorAuthProcess(error.message);
-    });
+    this.afAuth.auth
+      .signOut()
+      .then(() => {
+        this.user = undefined;
+      })
+      .catch(error => {
+        that.alertService.errorAuthProcess(error.message);
+      });
   }
 
   getLoggedInUser() {
@@ -47,7 +50,8 @@ export class AuthService {
 
   loginEmail(email: string, password: string): Promise<User> {
     return new Promise((resolve, reject) => {
-      this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      this.afAuth.auth
+        .signInWithEmailAndPassword(email, password)
         .then(async (result: auth.UserCredential) => {
           resolve(await this.getAndSetUserFromAPICred(result));
         })
@@ -57,34 +61,46 @@ export class AuthService {
     });
   }
 
-  private getAndSetUserFromAPICred(credential: auth.UserCredential): Promise<User> {
+  public getUser(): User {
+    return this.user;
+  }
+
+  private getAndSetUserFromAPICred(
+    credential: auth.UserCredential
+  ): Promise<User> {
     return new Promise(async (resolve, reject) => {
       try {
-        const login: Login = await this.apiService.login(credential.user.displayName, credential.user.email, credential.user.uid);
+        const login: Login = await this.apiService.login(
+          credential.user.displayName,
+          credential.user.email,
+          credential.user.uid
+        );
         this.user = { token: login.token, trainer: login.trainer };
         resolve(this.user);
       } catch (error) {
         reject(error);
       }
-
     });
   }
 
   private getAndSetUserFromAPIUser(fUser: firebase.User): Promise<User> {
     return new Promise(async (resolve, reject) => {
       try {
-        const login: Login = await this.apiService.login(fUser.displayName, fUser.email, fUser.uid);
+        const login: Login = await this.apiService.login(
+          fUser.displayName,
+          fUser.email,
+          fUser.uid
+        );
         this.user = { token: login.token, trainer: login.trainer };
         resolve(this.user);
       } catch (error) {
         reject(error);
       }
-
     });
   }
 
   ReconnectSession(fUser: firebase.User) {
-this.getAndSetUserFromAPIUser(fUser); hier weiter machen für login page die llogik wahrscheinlich als promise zurüc geben 
+    this.getAndSetUserFromAPIUser(fUser);
   }
 
   resetPassword(email: string) {

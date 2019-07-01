@@ -1,24 +1,30 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth/athentification.service";
 import { AlertService } from "../../services/alert/alert.service";
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
 import { Router } from "@angular/router";
-import { Team } from '../../model/team.model';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { TAltersklasse, TLiga, EnumsService } from 'src/app/services/enums/enums.service';
-import { MockingService } from 'src/app/services/mocking/mocking.service';
-import { UserService } from 'src/app/services/user/user.service';
-import { Player } from 'src/app/model/player.model';
-import { Address } from 'src/app/model/address.model';
+import { Team } from "../../model/team.model";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import {
+  TAltersklasse,
+  TLiga,
+  EnumsService
+} from "src/app/services/enums/enums.service";
+import { MockingService } from "src/app/services/mocking/mocking.service";
+import { UserService } from "src/app/services/user/user.service";
+import { Player } from "src/app/model/player.model";
+import { Address } from "src/app/model/address.model";
 
-enum ENUM_MODE { SELECTION, CREATE_TEAM }
+enum ENUM_MODE {
+  SELECTION,
+  CREATE_TEAM
+}
 
 @Component({
   selector: "app-teams",
   templateUrl: "./teams.page.html",
   styleUrls: ["./teams.page.scss"]
 })
-
 export class TeamsPage implements OnInit {
   mode: ENUM_MODE;
 
@@ -30,13 +36,12 @@ export class TeamsPage implements OnInit {
 
   private dumm_id_counter: number = 5;
 
-
   // Inputfields
 
   // Player
   name: string;
 
-  //Team  
+  //Team
   altersklasse: TAltersklasse;
   liga: TLiga;
 
@@ -46,13 +51,10 @@ export class TeamsPage implements OnInit {
     private router: Router,
     private http: HttpClient,
     private enumService: EnumsService,
-    private mockingService: MockingService,
     public userService: UserService
-  ) {
+  ) {}
 
-  }
-
-  ngOnInit() { }
+  ngOnInit() {}
 
   ionViewDidEnter() {
     // Event
@@ -81,7 +83,9 @@ export class TeamsPage implements OnInit {
   }
 
   onButtonTeamClick(index: number) {
-    this.userService.selectedTeam = this.userService.user.teams[index];
+    this.userService.selectedTeam = this.authService.getUser().trainer.teams[
+      index
+    ];
     this.router.navigate(["/overview"]);
   }
 
@@ -89,7 +93,10 @@ export class TeamsPage implements OnInit {
     if (this.userService.selectedTeam !== undefined) {
       this.router.navigate([routeTarget]);
     } else {
-      this.alertService.showInformation("Achtung:", "Bitte wählen sie zuerst eine Mannschaft aus!");
+      this.alertService.showInformation(
+        "Achtung:",
+        "Bitte wählen sie zuerst eine Mannschaft aus!"
+      );
     }
   }
 
@@ -103,12 +110,15 @@ export class TeamsPage implements OnInit {
   }
 
   validateNewTeamInput(): boolean {
-    return this.name !== undefined && this.altersklasse !== undefined && this.liga !== undefined;
+    return (
+      this.name !== undefined &&
+      this.altersklasse !== undefined &&
+      this.liga !== undefined
+    );
   }
 
   createNewTeam(name: string, alterklasse: TAltersklasse, liga: TLiga) {
-    const team: Team = { alterklasse, liga, name, id: (Math.floor(Math.random() * 1000) + 5), players: [] };
-    this.userService.user.teams.push(team);
+    throw new Error("nicht implementiert!");
   }
 
   resetPageToDefaultView() {

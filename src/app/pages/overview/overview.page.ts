@@ -4,11 +4,19 @@ import { AlertService } from "../../services/alert/alert.service";
 import { Player } from "../../model/player.model";
 import { Address } from "src/app/model/address.model";
 import { MockingService } from "../../services/mocking/mocking.service";
-import { UserService } from 'src/app/services/user/user.service';
-import { EnumsService, TAltersklasse, TLiga } from 'src/app/services/enums/enums.service';
-import { Team } from 'src/app/model/team.model';
+import { UserService } from "src/app/services/user/user.service";
+import {
+  EnumsService,
+  TAltersklasse,
+  TLiga
+} from "src/app/services/enums/enums.service";
+import { Team } from "src/app/model/team.model";
+import { AuthService } from "src/app/services/auth/athentification.service";
 
-enum ENUM_MODE { EVALUATE_PLAYER, CREATE_PLAYER }
+enum ENUM_MODE {
+  EVALUATE_PLAYER,
+  CREATE_PLAYER
+}
 
 @Component({
   selector: "app-overview",
@@ -16,7 +24,6 @@ enum ENUM_MODE { EVALUATE_PLAYER, CREATE_PLAYER }
   styleUrls: ["./overview.page.scss"]
 })
 export class OverviewPage implements OnInit {
-
   mode: ENUM_MODE;
 
   enumVisibilityMode = ENUM_MODE;
@@ -28,7 +35,6 @@ export class OverviewPage implements OnInit {
   private dumm_id_counter: number = 5;
 
   UserTeams: Team[];
-
 
   // Inputfields
 
@@ -44,7 +50,7 @@ export class OverviewPage implements OnInit {
   town: string;
   phone: number;
 
-  //Team  
+  //Team
   altersklasse: TAltersklasse;
   liga: TLiga;
   selectedTeamNewPlayer: Team;
@@ -52,50 +58,69 @@ export class OverviewPage implements OnInit {
   constructor(
     private router: Router,
     private alertService: AlertService,
-    private mockingService: MockingService,
+    private authService: AuthService,
     public userService: UserService,
     private enumService: EnumsService
-  ) { }
+  ) {}
 
   players: Player[];
   selectedPlayer: Player;
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ionViewDidEnter() {
     // Event
     this.mode = ENUM_MODE.EVALUATE_PLAYER;
-    this.players = this.userService.selectedTeam.players;
+    this.players = this.userService.selectedTeam.spieler;
     this.selectedPlayer = undefined;
   }
 
   showAdress() {
-    this.alertService.showInformation(
-      "Anschrift:",
-      this.selectedPlayer.address.addressToString()
-    );
+    const adr: Address = this.selectedPlayer.kontakt;
+    const msg: string =
+      adr.strassenname +
+      " " +
+      adr.hausnummer +
+      " " +
+      adr.postleitzahl +
+      " " +
+      adr.ort +
+      " (Tel.: " +
+      adr.telefonnummer +
+      ")";
+
+    this.alertService.showInformation("Anschrift:", msg);
   }
 
   submitNewPlayer() {
     if (this.validateNewPlayerInput() === true) {
-      this.createNewPlayer(this.name, this.birth, this.street, this.streetnumber, this.postcode, this.town, this.phone, this.isWoman)
+      this.createNewPlayer(
+        this.name,
+        this.birth,
+        this.street,
+        this.streetnumber,
+        this.postcode,
+        this.town,
+        this.phone,
+        this.isWoman
+      );
       this.resetPageToDefaultView();
     } else {
       this.alertService.errorEmptyInputs();
     }
   }
 
-  createNewPlayer(name: string, birth: Date, street: string,
-    streetnumber: string, postcode: number, town: string,
-    phone: number, isWomen: boolean): void {
-
-    const player: Player = {
-      istFrau: isWomen, birth, memo: "",
-      id: this.dumm_id_counter, name, properties: [],
-      address: new Address(street, streetnumber, postcode, town, phone)
-    }
-    this.dumm_id_counter++;
-    this.userService.selectedTeam.players.push(player);
+  createNewPlayer(
+    name: string,
+    birth: Date,
+    street: string,
+    streetnumber: string,
+    postcode: number,
+    town: string,
+    phone: number,
+    isWomen: boolean
+  ): void {
+    throw new Error("nicht implementiert!");
   }
 
   resetPageToDefaultView() {
@@ -117,10 +142,18 @@ export class OverviewPage implements OnInit {
   }
 
   validateNewPlayerInput(): boolean {
-    if (this.isWoman === undefined) { this.isWoman = false; }
-    return this.name !== undefined && this.birth !== undefined && this.street !== undefined
-      && this.streetnumber !== undefined && this.postcode !== undefined
-      && this.town !== undefined && this.phone !== undefined;
+    if (this.isWoman === undefined) {
+      this.isWoman = false;
+    }
+    return (
+      this.name !== undefined &&
+      this.birth !== undefined &&
+      this.street !== undefined &&
+      this.streetnumber !== undefined &&
+      this.postcode !== undefined &&
+      this.town !== undefined &&
+      this.phone !== undefined
+    );
   }
 
   onNewPlayerClick() {
