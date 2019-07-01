@@ -63,6 +63,10 @@ export class AuthService {
     return this.user;
   }
 
+  public getToken(): string {
+    return this.user.token;
+  }
+
   private getAndSetUserFromAPICred(
     credential: auth.UserCredential
   ): Promise<User> {

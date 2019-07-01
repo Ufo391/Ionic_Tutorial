@@ -11,23 +11,10 @@ import {
   UpdatePlayerResponse
 } from "src/app/responses/response.interfaces";
 import { Player } from "src/app/model/player.model";
+import { TAltersklasse, TLiga } from '../enums/enums.service';
 
 export abstract class AbstractServerAPI {
   constructor(public userService: UserService) {}
-
-  /*
-    async login(name: string, email: string, firebirdID: string): Promise<void> {
-        const result: User = await this.getUser(email, firebirdID);
-        if (result === null) {
-            throw new Error('Der Benutzer mit der E-Mail-Adresse \"' + email + '\" existiert nicht!');
-        } else {
-            this.authService.setAuthToken(this.getToken(result), result);
-            this.userService.user = result;
-        }
-    }*/
-
-  abstract getUser(email: string, firebirdID: string): Promise<User>;
-  abstract getToken(user: User): string;
 
   abstract login(
     name: string,
@@ -39,7 +26,7 @@ export abstract class AbstractServerAPI {
 
   abstract GetAllTeams(token: string): Promise<GetAllTeamsResponse>;
   abstract GetTeam(token: string, id: number): Promise<GetTeamANDCreateTeamResponse>;
-  abstract CreateTeam(token: string, team: Team): Promise<GetTeamANDCreateTeamResponse>;
+  abstract CreateTeam(token: string, name: string, altersklasse: TAltersklasse, liga: TLiga): Promise<GetTeamANDCreateTeamResponse>;
 
   abstract CreatePlayer(token: string, player: Player): Promise<CreatePlayerResponse>;
   abstract GetPlayer(token: string, id: number): Promise<GetPlayerResponse>;

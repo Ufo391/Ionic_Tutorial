@@ -9,6 +9,8 @@ import {
 } from "src/app/services/enums/enums.service";
 import { UserService } from "src/app/services/user/user.service";
 import { Trainer } from "src/app/model/trainer.model";
+import { ApiService } from "src/app/services/api/api.service";
+import { GetTeamANDCreateTeamResponse } from "src/app/responses/response.interfaces";
 
 enum ENUM_MODE {
   SELECTION,
@@ -41,7 +43,8 @@ export class TeamsPage implements OnInit {
     private alertService: AlertService,
     private router: Router,
     private enumService: EnumsService,
-    public userService: UserService
+    public userService: UserService,
+    private apiService: ApiService
   ) {
     this.createEmptyTeamsArray();
   }
@@ -96,8 +99,19 @@ export class TeamsPage implements OnInit {
 
   submitNewTeam() {
     if (this.validateNewTeamInput() === true) {
-      this.createNewTeam(this.name, this.altersklasse, this.liga);
-      this.resetPageToDefaultView();
+      //this.createNewTeam(this.name, this.altersklasse, this.liga);
+
+      this.apiService
+        .CreateTeam(
+          this.authService.getToken(),
+          this.name,
+          this.altersklasse,
+          this.liga
+        )
+        .then((res: GetTeamANDCreateTeamResponse) => {
+          debugger;
+          this.resetPageToDefaultView();
+        });
     } else {
       this.alertService.errorEmptyInputs();
     }
@@ -111,8 +125,13 @@ export class TeamsPage implements OnInit {
     );
   }
 
-  createNewTeam(name: string, alterklasse: TAltersklasse, liga: TLiga) {
-    throw new Error("nicht implementiert!");
+  createNewTeam(name: string, altersklasse: TAltersklasse, liga: TLiga) {
+    this.apiService.CreateTeam(
+      this.authService.getUser().token,
+      name,
+      altersklasse,
+      liga
+    );
   }
 
   resetPageToDefaultView() {
