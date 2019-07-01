@@ -16,32 +16,32 @@
 <ion-tabs>
   <ion-content *ngIf="this.mode === this.enumVisibilityMode.SELECTION">
     <ion-button
-      *ngIf="userService.user.teams.length >= 1"
+      *ngIf="authService.getUser().trainer.teams.length >= 1"
       expand="full"
       class="mannschaft-buttons"
       (click)="onButtonTeamClick(0)"      
-      >{{ this.userService.user.teams[0].name }}</ion-button
+      >{{ this.authService.getUser().trainer.teams[0].name }}</ion-button
     >
     <ion-button
-      *ngIf="userService.user.teams.length >= 2"
+      *ngIf="authService.getUser().trainer.teams.length >= 2"
       expand="full"
       class="mannschaft-buttons"
       (click)="onButtonTeamClick(1)"
-      >{{ this.userService.user.teams[1].name }}</ion-button
+      >{{ this.authService.getUser().trainer.teams[1].name }}</ion-button
     >
     <ion-button
-      *ngIf="userService.user.teams.length >= 3"
+      *ngIf="authService.getUser().trainer.teams.length >= 3"
       expand="full"
       class="mannschaft-buttons"
       (click)="onButtonTeamClick(2)"
-      >{{ this.userService.user.teams[2].name }}</ion-button
+      >{{ this.authService.getUser().trainer.teams[2].name }}</ion-button
     >
     <ion-button
-      *ngIf="userService.user.teams.length >= 4"
+      *ngIf="authService.getUser().trainer.teams.length >= 4"
       expand="full"
       class="mannschaft-buttons"
       (click)="onButtonTeamClick(3)"
-      >{{ this.userService.user.teams[3].name }}</ion-button
+      >{{ this.authService.getUser().trainer.teams[3].name }}</ion-button
     >
   </ion-content>
 
@@ -93,7 +93,7 @@
 
   <ion-button
     (click)="onNewTeamClick()"
-    *ngIf="userService.user.teams.length < 4"
+    *ngIf="authService.getUser().trainer.teams.length < 4"
     >Neue Mannschaft</ion-button
   >
   <ion-button (click)="logout()" [routerLink]="['/login']"

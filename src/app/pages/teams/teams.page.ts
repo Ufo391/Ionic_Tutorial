@@ -1,19 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth/athentification.service";
 import { AlertService } from "../../services/alert/alert.service";
-import { Observable } from "rxjs";
 import { Router } from "@angular/router";
-import { Team } from "../../model/team.model";
-import { HttpClient, HttpParams } from "@angular/common/http";
 import {
   TAltersklasse,
   TLiga,
   EnumsService
 } from "src/app/services/enums/enums.service";
-import { MockingService } from "src/app/services/mocking/mocking.service";
 import { UserService } from "src/app/services/user/user.service";
-import { Player } from "src/app/model/player.model";
-import { Address } from "src/app/model/address.model";
+import { Trainer } from "src/app/model/trainer.model";
 
 enum ENUM_MODE {
   SELECTION,
@@ -34,10 +29,6 @@ export class TeamsPage implements OnInit {
 
   ligaOptions = this.enumService.GetENUMValues(TLiga);
 
-  private dumm_id_counter: number = 5;
-
-  // Inputfields
-
   // Player
   name: string;
 
@@ -49,27 +40,30 @@ export class TeamsPage implements OnInit {
     public authService: AuthService,
     private alertService: AlertService,
     private router: Router,
-    private http: HttpClient,
     private enumService: EnumsService,
     public userService: UserService
-  ) {}
+  ) {
+    this.createEmptyTeamsArray();
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.createEmptyTeamsArray();
+  }
 
   ionViewDidEnter() {
     // Event
     this.mode = ENUM_MODE.SELECTION;
-    this.setCurrentUser();
+    this.createEmptyTeamsArray();
   }
 
-  setCurrentUser() {
-    this.authService.getLoggedInUser().subscribe(user => {
-      if (user !== null) {
-        // nötig ?
-      } else {
-        this.router.navigate(["/login"]);
-      }
-    });
+  private createEmptyTeamsArray() {
+    if (this.authService.getUser() === undefined) {
+      throw new Error("Es muss in diesem Bereich ein User existieren!");
+    }
+    const trainer: Trainer = this.authService.getUser().trainer;
+    if (trainer.teams === undefined) {
+      trainer.teams = [];
+    }
   }
 
   private resetInputs(): void {

@@ -4,17 +4,17 @@ import { Address } from '../model/address.model';
 import { PlayerPropertie } from '../model/playerPropertie.model';
 import { Team } from '../model/team.model';
 
-export interface Login {
+export interface LoginResponse {
     error: string;
     token: string;
     trainer: Trainer;
 }
 
-export interface Logout {
+export interface LogoutResponse {
     error: string;
 }
 
-export interface GetAllTeams {
+export interface GetAllTeamsResponse {
     error: string;
     id: number;
     name: string;
@@ -22,7 +22,7 @@ export interface GetAllTeams {
     liga: number;
 }
 
-export interface GetTeamANDCreateTeam {
+export interface GetTeamANDCreateTeamResponse {
     error: string;
     id: number;
     name: string;
@@ -32,7 +32,7 @@ export interface GetTeamANDCreateTeam {
     spieler: Player;
 }
 
-export interface CreatePlayer {
+export interface CreatePlayerResponse {
     error: string;
     id: number;
     geburtstag: string;
@@ -44,7 +44,7 @@ export interface CreatePlayer {
     teams: Team[];
 }
 
-export interface GetPlayer {
+export interface GetPlayerResponse {
     error: string;
     id: number;
     name: string;
@@ -54,7 +54,7 @@ export interface GetPlayer {
     spieler: Player[];
 }
 
-export interface UpdatePlayer {
+export interface UpdatePlayerResponse {
     error: string;
     id: number;
     geburtstag: string;

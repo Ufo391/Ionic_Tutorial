@@ -2,13 +2,13 @@ import { User } from "src/app/model/user.model";
 import { UserService } from "../user/user.service";
 import { Team } from "src/app/model/team.model";
 import {
-  Login,
-  Logout,
-  GetAllTeams,
-  GetTeamANDCreateTeam,
-  CreatePlayer,
-  GetPlayer,
-  UpdatePlayer
+  LoginResponse,
+  LogoutResponse,
+  GetAllTeamsResponse,
+  GetTeamANDCreateTeamResponse,
+  CreatePlayerResponse,
+  GetPlayerResponse,
+  UpdatePlayerResponse
 } from "src/app/responses/response.interfaces";
 import { Player } from "src/app/model/player.model";
 
@@ -33,15 +33,15 @@ export abstract class AbstractServerAPI {
     name: string,
     email: string,
     firebaseID: string
-  ): Promise<Login>;
-  abstract logout(token: string): Promise<Logout>;
+  ): Promise<LoginResponse>;
+  abstract logout(token: string): Promise<LogoutResponse>;
   abstract loginGoogle(): void;
 
-  abstract GetAllTeams(token: string): Promise<GetAllTeams>;
-  abstract GetTeam(token: string, id: number): Promise<GetTeamANDCreateTeam>;
-  abstract CreateTeam(token: string, team: Team): Promise<GetTeamANDCreateTeam>;
+  abstract GetAllTeams(token: string): Promise<GetAllTeamsResponse>;
+  abstract GetTeam(token: string, id: number): Promise<GetTeamANDCreateTeamResponse>;
+  abstract CreateTeam(token: string, team: Team): Promise<GetTeamANDCreateTeamResponse>;
 
-  abstract CreatePlayer(token: string, player: Player): Promise<CreatePlayer>;
-  abstract GetPlayer(token: string, id: number): Promise<GetPlayer>;
-  abstract UpdatePlayer(token: string, id: number): Promise<UpdatePlayer>;
+  abstract CreatePlayer(token: string, player: Player): Promise<CreatePlayerResponse>;
+  abstract GetPlayer(token: string, id: number): Promise<GetPlayerResponse>;
+  abstract UpdatePlayer(token: string, id: number): Promise<UpdatePlayerResponse>;
 }

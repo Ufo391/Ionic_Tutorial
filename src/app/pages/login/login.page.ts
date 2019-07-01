@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
     private authService: AuthService
   ) {}
 
-  ngOnInit() {    
+  ngOnInit() {
     this.setCurrentUser();
   }
 
@@ -38,8 +38,9 @@ export class LoginPage implements OnInit {
 
     this.authService.getLoggedInUser().subscribe((user: firebase.User) => {
       if (user !== null) {
-        this.authService.getAndSetUserFromAPIUser(user);
-        this.navigateToTeamsPage();
+        this.authService.getAndSetUserFromAPIUser(user).then((user: User) => {
+          this.navigateToTeamsPage();
+        });
       }
     });
   }

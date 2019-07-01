@@ -4,7 +4,7 @@ import { auth } from "firebase";
 import { AlertService } from "../alert/alert.service";
 import { User } from "src/app/model/user.model";
 import { ApiService } from "../api/api.service";
-import { Login } from "src/app/responses/response.interfaces";
+import { LoginResponse } from "src/app/responses/response.interfaces";
 
 @Injectable({
   providedIn: "root"
@@ -68,8 +68,7 @@ export class AuthService {
   ): Promise<User> {
     return new Promise(async (resolve, reject) => {
       try {
-        debugger;
-        const login: Login = await this.apiService.login(
+        const login: LoginResponse = await this.apiService.login(
           credential.user.displayName,
           credential.user.email,
           credential.user.uid
@@ -85,12 +84,11 @@ export class AuthService {
   public getAndSetUserFromAPIUser(fUser: firebase.User): Promise<User> {
     return new Promise(async (resolve, reject) => {
       try {
-        const login: Login = await this.apiService.login(
+        const login: LoginResponse = await this.apiService.login(
           fUser.displayName,
           fUser.email,
           fUser.uid
         );
-        debugger;
         this.user = { token: login.token, trainer: login.trainer };
         resolve(this.user);
       } catch (error) {
