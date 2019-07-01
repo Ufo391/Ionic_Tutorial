@@ -17,7 +17,7 @@ import {
   UpdatePlayerResponse
 } from "src/app/responses/response.interfaces";
 import { Team } from "src/app/model/team.model";
-import { TAltersklasse, TLiga } from '../enums/enums.service';
+import { TAltersklasse, TLiga } from "../enums/enums.service";
 
 @Injectable({
   providedIn: "root"
@@ -37,14 +37,19 @@ export class ApiService extends AbstractServerAPI {
     return this.http.post<LoginResponse>(uri, body).toPromise();
   }
 
-  CreateTeam(token: string, name: string, altersklasse: TAltersklasse, liga: TLiga): Promise<GetTeamANDCreateTeamResponse> {
+  CreateTeam(
+    token: string,
+    name: string,
+    altersklasse: TAltersklasse,
+    liga: TLiga
+  ): Promise<GetTeamANDCreateTeamResponse> {
     const body: CreateTeamRequest = {
       authtoken: token,
       altersklasse,
       liga,
       name
     };
-    const uri = this.getRootUri() + "Team";
+    const uri = this.getRootUri() + "Team?authtoken=" + token;
     return this.http.post<GetTeamANDCreateTeamResponse>(uri, body).toPromise();
   }
 
