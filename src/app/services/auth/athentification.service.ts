@@ -77,7 +77,7 @@ export class AuthService {
           credential.user.email,
           credential.user.uid
         );
-        this.user = { token: login.token, trainer: login.trainer };
+        this.user = { token: login.token, trainer: login.trainer };        
         resolve(this.user);
       } catch (error) {
         reject(error);
@@ -93,7 +93,7 @@ export class AuthService {
           fUser.email,
           fUser.uid
         );
-        this.user = { token: login.token, trainer: login.trainer };
+        this.user = { token: login.token, trainer: login.trainer };        
         resolve(this.user);
       } catch (error) {
         reject(error);

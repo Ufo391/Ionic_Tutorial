@@ -15,7 +15,8 @@ import { ApiService } from "src/app/services/api/api.service";
 import {
   CreatePlayerResponse,
   InsertPlayerToTeamResponse,
-  GetTrainerResponse
+  GetTrainerResponse,
+  GetTeamANDCreateTeamResponse
 } from "src/app/responses/response.interfaces";
 import { DatePipe } from "@angular/common";
 
@@ -143,9 +144,15 @@ export class OverviewPage implements OnInit {
         this.authService.getToken(),
         this.authService.getUser().trainer.id
       )
-      .then((res: GetTrainerResponse) => {        
-        debugger;
-        that.players = res.teams[that.userService.selectedIndex].spieler;
+      .then((res: GetTrainerResponse) => {
+        that.apiService
+          .GetTeam(
+            that.authService.getToken(),
+            that.userService.selectedTeam.id
+          )
+          .then((res: GetTeamANDCreateTeamResponse) => {
+            that.players = res.spieler;
+          });
       });
   }
 

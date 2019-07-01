@@ -41,8 +41,7 @@ export class ApiService extends AbstractServerAPI {
       name = "default";
     }
     const body: LoginRequest = { name, email, firebaseID };
-    const uri = this.getRootUri() + "Login";
-    debugger;
+    const uri = this.getRootUri() + "Login";    
     return this.http.post<LoginResponse>(uri, body).toPromise();
   }
 
@@ -94,6 +93,11 @@ export class ApiService extends AbstractServerAPI {
     return this.http.post<InsertPlayerToTeamResponse>(uri, body).toPromise();
   }
 
+  GetTeam(token: string, id: number): Promise<GetTeamANDCreateTeamResponse> {
+    const uri = this.getRootUri() + "team/" + id + "?authtoken=" + token;
+    return this.http.get<GetTeamANDCreateTeamResponse>(uri).toPromise();
+  }
+
   logout(token: string): Promise<LogoutResponse> {
     throw new Error("Method not implemented.");
   }
@@ -101,9 +105,6 @@ export class ApiService extends AbstractServerAPI {
     throw new Error("Method not implemented.");
   }
   GetAllTeams(token: string): Promise<GetAllTeamsResponse> {
-    throw new Error("Method not implemented.");
-  }
-  GetTeam(token: string, id: number): Promise<GetTeamANDCreateTeamResponse> {
     throw new Error("Method not implemented.");
   }
   GetPlayer(token: string, id: number): Promise<GetPlayerResponse> {

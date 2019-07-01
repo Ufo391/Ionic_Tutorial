@@ -30,7 +30,7 @@ export interface GetTeamANDCreateTeamResponse {
   altersklasse: number;
   liga: number;
   trainer: Trainer[];
-  spieler: Player;
+  spieler: Player[];
 }
 
 export interface CreatePlayerResponse {
