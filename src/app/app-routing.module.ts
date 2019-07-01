@@ -7,7 +7,9 @@ const routes: Routes = [
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'teams', loadChildren: './pages/teams/teams.module#TeamsPageModule'},
   { path: 'overview', loadChildren: './pages/overview/overview.module#OverviewPageModule'},
-  { path: 'planer', loadChildren: './pages/planer/planer.module#PlanerPageModule' },  { path: 'team-management', loadChildren: './pages/team-management/team-management.module#TeamManagementPageModule' },
+  { path: 'planer', loadChildren: './pages/planer/planer.module#PlanerPageModule' },
+  { path: 'team-management', loadChildren: './pages/team-management/team-management.module#TeamManagementPageModule' },
+  { path: 'planer2', loadChildren: './pages/planer2/planer2.module#Planer2PageModule' },
 
 ];
 
